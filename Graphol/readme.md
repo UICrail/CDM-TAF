@@ -1,3 +1,5 @@
+# Purpose
+
 The present folder contains the TAF ontology expressed in GRAPHOL.
 
 Quoting from [an OBDA Systems repository](https://github.com/obdasystems/eddy/wiki/Introduction#graphol):
@@ -8,3 +10,7 @@ Quoting from [an OBDA Systems repository](https://github.com/obdasystems/eddy/wi
 The recommended (and, so far, only) GRAPHOL editor, EDDY, is a multiplatform desktop application actively maintained by OBDA Systems. This open source application is available on (the EDDY repository)[https://github.com/obdasystems/eddy] under a GPL 3.0 license.
 
 GRAPHOL models can also be viewed in web browsers using (GRAPHOLSCAPE)[https://github.com/obdasystems/grapholscape].
+
+# Contents
+
+The whole TAF TSI revisited ontology is contained in a single GRAPHOL file.
