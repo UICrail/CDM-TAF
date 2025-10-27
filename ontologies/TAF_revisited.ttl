@@ -1,0 +1,1148 @@
+@prefix : <http://cdm.ovh/taf/tafp5#> .
+@prefix bag: <http://www.ontologydesignpatterns.org/cp/owl/bag.owl#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix taf: <http://data.europa.eu/949/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix list: <http://www.ontologydesignpatterns.org/cp/owl/list.owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix tafp5: <https://cdm.ovh/taf/tafp5#> .
+@prefix rst_typ: <http://cdm.ovh/rsm/rolling_stock/typology/typology#> .
+@prefix rst_cons: <http://cdm.ovh/rsm/rolling_stock/consist/RollingStockConsist#> .
+@base <http://cdm.ovh/taf/tafp5#> .
+
+<http://cdm.ovh/taf/tafp5#> rdf:type owl:Ontology ;
+                             owl:versionIRI <http://cdm.ovh/taf/0.1/tafp5#> ;
+                             owl:imports <http://cdm.ovh/rsm/rolling_tock/typology> ;
+                             rdfs:comment "In the context of operations in general, and the TAF TSI in particular, \"weight\"  is often used instead of \"mass\" while the latter is correct (and units are always mass units such as kg). In the present ontology, we only use \"mass\"  in identifiers and labels."@en .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#boolean
+xsd:boolean rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype ;
+         rdfs:comment "Not part of OWL2 datatype map. Will crash HermiT, not however Pellet."@en .
+
+
+###  http://www.w3.org/2001/XMLSchema#dateTimeStamp
+xsd:dateTimeStamp rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#decimal
+xsd:decimal rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#string
+xsd:string rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#time
+xsd:time rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/cp/owl/bag.owl#hasItem
+bag:hasItem rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/list.owl#nextItem
+list:nextItem rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/list.owl#previousItem
+list:previousItem rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation
+dul:hasLocation rdf:type owl:ObjectProperty ;
+                rdfs:domain tafp5:TrainRun ;
+                rdfs:range tafp5:OperationalLocation ;
+                rdfs:comment "To be understood as \"at some point in time\". Which point (or interval) will be given by the States."@en .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant
+dul:hasParticipant rdf:type owl:ObjectProperty ;
+                   rdfs:domain tafp5:TrainRun ;
+                   rdfs:range rst_typ:RollingStock ;
+                   rdfs:comment "To be understood as \"at some point in time\". Which point (or interval) will be given by the States."@en .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTimeInterval
+dul:hasTimeInterval rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy
+dul:isClassifiedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy
+dul:isDescribedBy rdf:type owl:ObjectProperty ;
+                  rdfs:domain tafp5:TrainRun ;
+                  rdfs:range tafp5:Journey ;
+                  rdfs:comment "To be understood as \"at some point in time\". Which point (or interval) will be given by the States."@en .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf
+dul:isLocationOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor
+dul:isSettingFor rdf:type owl:ObjectProperty ;
+                 rdfs:domain tafp5:LoadState ;
+                 rdfs:range tafp5:ITU ,
+                            tafp5:Wagon .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#playsRole
+dul:playsRole rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes
+dul:realizes rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#inScheme
+skos:inScheme rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/prov#wasAttributedTo
+prov:wasAttributedTo rdf:type owl:ObjectProperty ;
+                     rdfs:domain prov:Entity .
+
+
+###  http://www.w3.org/ns/prov#wasRevisionOf
+prov:wasRevisionOf rdf:type owl:ObjectProperty .
+
+
+###  https://cdm.ovh/taf/tafp5#atOperationalLocation
+tafp5:atOperationalLocation rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf dul:hasLocation ;
+                            owl:inverseOf tafp5:isOperationalLocationOf ;
+                            rdfs:domain tafp5:OperationalArtifact ,
+                                        tafp5:TrainLocationState ;
+                            rdfs:range tafp5:OperationalLocation ;
+                            rdfs:label "at operational location"^^xsd:language .
+
+
+###  https://cdm.ovh/taf/tafp5#atTimeInstant
+tafp5:atTimeInstant rdf:type owl:ObjectProperty ;
+                    rdfs:domain tafp5:StateAtTime ;
+                    rdfs:range time:Instant ;
+                    rdfs:label "at time instant"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasDestination
+tafp5:hasDestination rdf:type owl:ObjectProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain tafp5:JourneySchedule ;
+                     rdfs:range tafp5:OperationalLocation ;
+                     rdfs:label "has destination"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasFacilityFunction
+tafp5:hasFacilityFunction rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf dul:isClassifiedBy ;
+                          rdfs:domain tafp5:Facility ;
+                          rdfs:range tafp5:FacilityRoleOrFunction ;
+                          rdfs:label "has facility function"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasJourney
+tafp5:hasJourney rdf:type owl:ObjectProperty ;
+                 rdfs:domain tafp5:TrainJourneyState ;
+                 rdfs:range tafp5:Journey ;
+                 rdfs:comment "not a functional property, as it can be expressed w.r.t. the planned journey or the executed journey (if available). User feedback welcome."@en ;
+                 rdfs:label "has journey" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasJourneySchedule
+tafp5:hasJourneySchedule rdf:type owl:ObjectProperty ;
+                         rdfs:domain tafp5:Journey ;
+                         rdfs:range tafp5:JourneySchedule ;
+                         rdfs:comment "Note: it may be that the same path or planned journey has multiple schedules (variants), not further characterized here, so we did not make this property functional."@en ;
+                         rdfs:label "has journey schedule" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasJourneySection
+tafp5:hasJourneySection rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf bag:hasItem ;
+                        owl:inverseOf tafp5:inJourneySchedule ;
+                        rdf:type owl:InverseFunctionalProperty ;
+                        rdfs:domain tafp5:JourneySchedule ;
+                        rdfs:range tafp5:JourneySection ;
+                        rdfs:comment "Inverse functional property."@en ;
+                        rdfs:label "has journey section" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasOTN
+tafp5:hasOTN rdf:type owl:ObjectProperty ;
+             rdfs:domain tafp5:TrainRun ;
+             rdfs:range tafp5:OTN ;
+             rdfs:comment "The same train run can have different Operational Train Numbers in its course, depending on the operator or network over which it is run."@en ;
+             rdfs:label "has OTN"@en ;
+             rdfs:seeAlso "http://data.europa.eu/949/hasOperationalTrainNumberIdentifier"^^xsd:anyURI .
+
+
+###  https://cdm.ovh/taf/tafp5#hasOrigin
+tafp5:hasOrigin rdf:type owl:ObjectProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain tafp5:JourneySchedule ;
+                rdfs:range tafp5:OperationalLocation ;
+                rdfs:label "has origin"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasPayload
+tafp5:hasPayload rdf:type owl:ObjectProperty ;
+                 rdfs:domain tafp5:TransportCollaborationMessage ;
+                 rdfs:range tafp5:OperationalState ;
+                 rdfs:label "has payload"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasPrimaryCode
+tafp5:hasPrimaryCode rdf:type owl:ObjectProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain tafp5:OperationalLocation ;
+                     rdfs:range tafp5:LocationPrimaryCode ;
+                     rdfs:label "has primary code"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasReferenceObject
+tafp5:hasReferenceObject rdf:type owl:ObjectProperty ;
+                         rdfs:domain tafp5:TransportCollaborationMessage ;
+                         rdfs:range [ rdf:type owl:Class ;
+                                      owl:unionOf ( tafp5:ITU
+                                                    tafp5:TrainRun
+                                                    tafp5:Wagon
+                                                  )
+                                    ] ;
+                         rdfs:label "has reference object" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasSubsidiaryCode
+tafp5:hasSubsidiaryCode rdf:type owl:ObjectProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain tafp5:OperationalLocation ;
+                        rdfs:range tafp5:LocationSubsidiaryCode ;
+                        rdfs:label "has subsidiary code"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasTimeExtent
+tafp5:hasTimeExtent rdf:type owl:ObjectProperty ;
+                    rdfs:domain tafp5:StateAtTime ;
+                    rdfs:range time:TemporalEntity ;
+                    rdfs:label "has time extent" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasTrainRunState
+tafp5:hasTrainRunState rdf:type owl:ObjectProperty ,
+                                owl:InverseFunctionalProperty ;
+                       rdfs:label "has train run state" .
+
+
+###  https://cdm.ovh/taf/tafp5#inJourneySchedule
+tafp5:inJourneySchedule rdf:type owl:ObjectProperty ;
+                        rdfs:label "in journey schedule"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#isOperationalLocationOf
+tafp5:isOperationalLocationOf rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf dul:isLocationOf ;
+                              rdfs:label "is operational location of"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#isStateOfTrainRun
+tafp5:isStateOfTrainRun rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf dul:isSettingFor ;
+                        rdf:type owl:FunctionalProperty ;
+                        rdfs:domain tafp5:TrainRunState ;
+                        rdfs:range tafp5:TrainRun ;
+                        rdfs:label "is state of train run" .
+
+[ owl:inverseOf tafp5:isStateOfTrainRun ;
+   rdfs:subPropertyOf tafp5:hasTrainRunState
+ ] .
+
+
+###  https://cdm.ovh/taf/tafp5#nextDescriptionVersion
+tafp5:nextDescriptionVersion rdf:type owl:ObjectProperty ;
+                             owl:inverseOf tafp5:previousDescriptionVersion ;
+                             rdf:type owl:FunctionalProperty ,
+                                      owl:InverseFunctionalProperty ;
+                             rdfs:label "next description version" .
+
+
+###  https://cdm.ovh/taf/tafp5#nextSection
+tafp5:nextSection rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf list:nextItem ;
+                  rdf:type owl:FunctionalProperty ,
+                           owl:InverseFunctionalProperty ;
+                  rdfs:domain tafp5:JourneySection ;
+                  rdfs:range tafp5:JourneySection ;
+                  rdfs:label "next section"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#playsFacilityRole
+tafp5:playsFacilityRole rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf dul:playsRole ;
+                        rdfs:domain tafp5:Facility ;
+                        rdfs:range tafp5:FacilityRoleOrFunction ;
+                        rdfs:label "plays facility role"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#playsOperationalRole
+tafp5:playsOperationalRole rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf dul:playsRole ;
+                           rdfs:domain dul:Organization ;
+                           rdfs:range tafp5:OperationalRole ;
+                           rdfs:label "plays operational role"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#previousDescriptionVersion
+tafp5:previousDescriptionVersion rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf prov:wasRevisionOf ,
+                                                    tafp5:revisesDescriptionVersion ;
+                                 rdf:type owl:FunctionalProperty ,
+                                          owl:InverseFunctionalProperty ;
+                                 rdfs:domain tafp5:VersionedDescription ;
+                                 rdfs:range tafp5:VersionedDescription ;
+                                 rdfs:comment "A transitive property linking a new description to the (sole) previous one it revises. \"Supersedes\" would be a ternary relation, the value of which could be deducted from the \"effective from\" datetimes, and the datetime of the query: not conceptualized in this ontology."@en ;
+                                 rdfs:label "previous description version" .
+
+
+###  https://cdm.ovh/taf/tafp5#previousSection
+tafp5:previousSection rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf list:previousItem ;
+                      rdf:type owl:FunctionalProperty ,
+                               owl:InverseFunctionalProperty ;
+                      rdfs:domain tafp5:JourneySection ;
+                      rdfs:range tafp5:JourneySection ;
+                      rdfs:label "previous section"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#realizesPlannedJourneyOrPath
+tafp5:realizesPlannedJourneyOrPath rdf:type owl:ObjectProperty ;
+                                   rdfs:subPropertyOf dul:realizes ;
+                                   rdfs:domain tafp5:ExecutedJourney ;
+                                   rdfs:range tafp5:PlannedJourneyOrPath ;
+                                   rdfs:comment "Planned journey (the object) may be a path, a planned journey (in the strict sense) or a forecast journey (an updated planned journey)"@en ;
+                                   rdfs:label "realizesPlannedJourneyOrPath"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#referenceOTN
+tafp5:referenceOTN rdf:type owl:ObjectProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain tafp5:TrainRun ;
+                   rdfs:range tafp5:ReferenceOTN ;
+                   rdfs:label "has reference OTN" .
+
+
+###  https://cdm.ovh/taf/tafp5#revisesDescriptionVersion
+tafp5:revisesDescriptionVersion rdf:type owl:ObjectProperty ,
+                                         owl:TransitiveProperty ;
+                                rdfs:comment "Links a description version to all previous description versions (therefore not a functional property). Transitive closure of previousDescriptionVersion."@en ;
+                                rdfs:label "revises description version" .
+
+
+###  https://cdm.ovh/taf/tafp5#trainOperatingRU
+tafp5:trainOperatingRU rdf:type owl:ObjectProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain tafp5:TrainRun ;
+                       rdfs:range tafp5:TrainOperator ;
+                       rdfs:comment "Points to the \"lead RU\" for the entire train"@en ;
+                       rdfs:label "train operating RU"@en ;
+                       rdfs:seeAlso "http://data.europa.eu/949/TrainOperatingRU"^^xsd:anyURI .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.w3.org/2006/time#inXSDDateTime
+time:inXSDDateTime rdf:type owl:DatatypeProperty ;
+                   rdfs:domain time:Instant ;
+                   rdfs:range xsd:dateTimeStamp ;
+                   rdfs:comment "not a functional property, in order to allow different time representations. Consistency between these is user responsibility."@en ;
+                   rdfs:label "in XSD date time"@en .
+
+
+###  http://www.w3.org/ns/prov#generatedAtTime
+prov:generatedAtTime rdf:type owl:DatatypeProperty ;
+                     rdfs:domain prov:Entity .
+
+
+###  http://www.w3.org/ns/prov#invalidatedAtTime
+prov:invalidatedAtTime rdf:type owl:DatatypeProperty .
+
+
+###  https://cdm.ovh/taf/tafp5#createdAt
+tafp5:createdAt rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf prov:generatedAtTime ;
+                rdfs:domain tafp5:VersionedDescription ;
+                rdfs:range xsd:dateTimeStamp ;
+                rdfs:comment "like other time properties, it is not made functional, to allow multiple time representations (time zones)."@en ;
+                rdfs:label "created at"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#effectiveFrom
+tafp5:effectiveFrom rdf:type owl:DatatypeProperty ;
+                    rdfs:domain tafp5:VersionedDescription ;
+                    rdfs:range xsd:dateTimeStamp ;
+                    rdfs:label "effective from"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#effectiveUntil
+tafp5:effectiveUntil rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf prov:invalidatedAtTime ;
+                     rdfs:domain tafp5:VersionedDescription ;
+                     rdfs:range xsd:dateTimeStamp ;
+                     rdfs:comment "Value can be computed by looking up updates and their \"effective from\" datetimes, supposing the newer versions invalidate earlier ones at the time they become effective. The ontology does not go that far (it would be a matter of SWRL rules)."@en ;
+                     rdfs:label "effective until"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasArrivalTime
+tafp5:hasArrivalTime rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain tafp5:JourneySchedule ;
+                     rdfs:range xsd:time ;
+                     rdfs:label "has arrival time"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasBICCcode
+tafp5:hasBICCcode rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain tafp5:ITU ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "BIC code according to ISO6346 (4 letters, 6 numeric digits and 1 check digit)"@en ;
+                  rdfs:label "has BIC code" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasComment
+tafp5:hasComment rdf:type owl:DatatypeProperty ;
+                 rdfs:domain tafp5:Message ;
+                 rdfs:range xsd:string ;
+                 rdfs:label "has comment"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasDepartureTime
+tafp5:hasDepartureTime rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain tafp5:JourneySchedule ;
+                       rdfs:range xsd:time ;
+                       rdfs:label "has departure time"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasDesignation
+tafp5:hasDesignation rdf:type owl:DatatypeProperty ;
+                     rdfs:domain tafp5:Track ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Designation: to be discussed. Probably not unique. Can have short or long forms (e.g. \"Track 5\"  in the context of some yard; \"Alnabru yard track 5\" in a larger context)."@en ;
+                     rdfs:label "has designation"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasFullText
+tafp5:hasFullText rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain tafp5:Message ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "typically, the full XML or JSON snippet (including comments, if any)"@en ;
+                  rdfs:label "has full text" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasMassInTons
+tafp5:hasMassInTons rdf:type owl:DatatypeProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain tafp5:TrainMassState ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:comment "provisional. To be expanded, using SSN and QUDT."@en ;
+                    rdfs:label "has mass in tons"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#isStationary
+tafp5:isStationary rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain tafp5:TrainMotionState ;
+                   rdfs:range xsd:boolean ;
+                   rdfs:label "is stationary"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#locationName
+tafp5:locationName rdf:type owl:DatatypeProperty ;
+                   rdfs:domain tafp5:OperationalLocation ;
+                   rdfs:range xsd:string ;
+                   rdfs:label "location name"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#messageID
+tafp5:messageID rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain tafp5:TransportCollaborationMessage ;
+                rdfs:range xsd:string ;
+                rdfs:label "message ID"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#messageVersion
+tafp5:messageVersion rdf:type owl:DatatypeProperty ;
+                     rdfs:domain tafp5:TransportCollaborationMessage ;
+                     rdfs:range xsd:string ;
+                     rdfs:label "message version"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#reportedAt
+tafp5:reportedAt rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf prov:generatedAtTime ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain tafp5:Message ;
+                 rdfs:range xsd:dateTimeStamp ;
+                 rdfs:comment "same semantics as prov:generatedAtTime"@en ;
+                 rdfs:label "reported at"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#reportedBy
+tafp5:reportedBy rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain tafp5:TransportCollaborationMessage ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment ""@en ;
+                 rdfs:label "has source"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#sizeAndTypeCode
+tafp5:sizeAndTypeCode rdf:type owl:DatatypeProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain tafp5:Container ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "4 digit alphanum code for container size and type, according to ISO6346"@en ;
+                      rdfs:label "size and type code" .
+
+
+###  https://cdm.ovh/taf/tafp5#trainDepartureDate
+tafp5:trainDepartureDate rdf:type owl:DatatypeProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain tafp5:TrainRun ;
+                         rdfs:range xsd:date ;
+                         rdfs:label "train departure date"@en ;
+                         rdfs:seeAlso taf:TrainDepartureDate .
+
+
+###  https://cdm.ovh/taf/tafp5#uicWagonNumber
+tafp5:uicWagonNumber rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain tafp5:Wagon ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "may it vary in a wagon's lifetime? if not, consider moving to rolling stock ontology."@en ;
+                     rdfs:label "uic wagon number"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://cdm.ovh/rsm/rolling_stock/typology/typology#RollingStock
+rst_typ:RollingStock rdf:type owl:Class .
+
+
+###  http://cdm.ovh/rsm/rolling_stock/typology/typology#Wagon
+rst_typ:Wagon rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/list.owl#List
+list:List rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/list.owl#ListItem
+list:ListItem rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description
+dul:Description rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact
+dul:DesignedArtifact rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event
+dul:Event rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject
+dul:InformationObject rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Organization
+dul:Organization rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject
+dul:PhysicalObject rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place
+dul:Place rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan
+dul:Plan rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process
+dul:Process rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role
+dul:Role rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation
+dul:Situation rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval
+dul:TimeInterval rdf:type owl:Class .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:Class .
+
+
+###  http://www.w3.org/2004/02/skos/core#ConceptScheme
+skos:ConceptScheme rdf:type owl:Class .
+
+
+###  http://www.w3.org/2006/time#Instant
+time:Instant rdf:type owl:Class ;
+             rdfs:label "Instant"@en .
+
+
+###  http://www.w3.org/2006/time#Interval
+time:Interval rdf:type owl:Class ;
+              rdfs:subClassOf dul:TimeInterval ;
+              rdfs:comment "W3C Time interval, possibly open-ended or degenerate (start = end)"@en .
+
+
+###  http://www.w3.org/2006/time#TemporalEntity
+time:TemporalEntity rdf:type owl:Class ;
+                    rdfs:comment "Note: format(s) to be discussed"@en ;
+                    rdfs:label "Temporal entity"@en .
+
+
+###  http://www.w3.org/ns/prov#Entity
+prov:Entity rdf:type owl:Class .
+
+
+###  https://cdm.ovh/taf/tafp5#AdministrativeState
+tafp5:AdministrativeState rdf:type owl:Class ;
+                          rdfs:subClassOf tafp5:OperationalState ;
+                          rdfs:label "Administrative state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#CargoCarrier
+tafp5:CargoCarrier rdf:type owl:Class ;
+                   rdfs:subClassOf tafp5:OperationalRole ;
+                   rdfs:label "Cargo carrier"@en ;
+                   rdfs:seeAlso taf:Carrier .
+
+
+###  https://cdm.ovh/taf/tafp5#CarrierState
+tafp5:CarrierState rdf:type owl:Class ;
+                   rdfs:subClassOf tafp5:OperationalState ;
+                   rdfs:label "Carrier state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Container
+tafp5:Container rdf:type owl:Class ;
+                rdfs:subClassOf tafp5:ITU ;
+                rdfs:label "Container"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#ExecutedJourney
+tafp5:ExecutedJourney rdf:type owl:Class ;
+                      rdfs:subClassOf dul:Process ,
+                                      tafp5:Journey ;
+                      owl:disjointWith tafp5:PlannedJourneyOrPath ;
+                      rdfs:label "Executed journey"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Facility
+tafp5:Facility rdf:type owl:Class ;
+               rdfs:subClassOf tafp5:OperationalArtifact ;
+               rdfs:label "Facility"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#FacilityRoleOrFunction
+tafp5:FacilityRoleOrFunction rdf:type owl:Class ;
+                             rdfs:subClassOf skos:Concept ;
+                             rdfs:comment "Constructed as the subset of all skos Concepts that are inScheme \"Facility role or function scheme\"."@en ,
+                                          "We assume functions to be permanent capabilities (by design), roles to be occasional capabilities (used in some situations), keeping those capabilities in a single terminology."@en ;
+                             rdfs:label "Facility role or function" .
+
+
+###  https://cdm.ovh/taf/tafp5#ForecastJourney
+tafp5:ForecastJourney rdf:type owl:Class ;
+                      rdfs:subClassOf tafp5:PlannedJourneyOrPath ;
+                      rdfs:label "Forecast journey"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#FreightRole
+tafp5:FreightRole rdf:type owl:Class ;
+                  rdfs:subClassOf tafp5:LoadRole ;
+                  owl:disjointWith tafp5:PassengerRole ;
+                  rdfs:label "Freight role" .
+
+
+###  https://cdm.ovh/taf/tafp5#ITU
+tafp5:ITU rdf:type owl:Class ;
+          rdfs:subClassOf tafp5:OperationalArtifact ;
+          rdfs:label "Intermodal Transport Unit"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Image
+tafp5:Image rdf:type owl:Class ;
+            rdfs:subClassOf dul:InformationObject ,
+                            tafp5:OperationalEntity ;
+            rdfs:label "Image"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Journey
+tafp5:Journey rdf:type owl:Class ;
+              rdfs:subClassOf tafp5:VersionedDescription ;
+              rdfs:label "Journey"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#JourneySchedule
+tafp5:JourneySchedule rdf:type owl:Class ;
+                      rdfs:subClassOf list:List ,
+                                      tafp5:VersionedDescription ;
+                      rdfs:comment """Description that is common to paths, planned journeys, and executed journeys. It has an origin, departure time, destination, arrival time.
+
+It consists in JourneySections, each journey section has the same structure."""@en ,
+                                   "Since journey structures are meant to be shared, their instances should not be modified once used. New instances should be minted for every change."@en ;
+                      rdfs:label "Journey schedule" .
+
+
+###  https://cdm.ovh/taf/tafp5#JourneySection
+tafp5:JourneySection rdf:type owl:Class ;
+                     rdfs:subClassOf list:ListItem ,
+                                     tafp5:JourneySchedule ;
+                     rdfs:comment "Journey sections are chained by properties nextSection and previousSection."@en ;
+                     rdfs:label "Journey section"@en ;
+                     rdfs:seeAlso "http://data.europa.eu/949/JourneySection"^^xsd:anyURI .
+
+
+###  https://cdm.ovh/taf/tafp5#LeadCarrier
+tafp5:LeadCarrier rdf:type owl:Class ;
+                  rdfs:subClassOf tafp5:CargoCarrier ;
+                  rdfs:label "Lead carrier"@en ;
+                  rdfs:seeAlso taf:LeadCarrier .
+
+
+###  https://cdm.ovh/taf/tafp5#LoadRole
+tafp5:LoadRole rdf:type owl:Class ;
+               rdfs:subClassOf dul:Role ,
+                               tafp5:OperationalEntity ;
+               rdfs:label "Load role" .
+
+
+###  https://cdm.ovh/taf/tafp5#LoadState
+tafp5:LoadState rdf:type owl:Class ;
+                rdfs:subClassOf tafp5:OperationalState ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty dul:hasTimeInterval ;
+                                  owl:allValuesFrom time:Interval
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty dul:isClassifiedBy ;
+                                  owl:allValuesFrom tafp5:FreightRole
+                                ] ;
+                rdfs:label "Load state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#LocationPrimaryCode
+tafp5:LocationPrimaryCode rdf:type owl:Class ;
+                          rdfs:subClassOf skos:Concept ;
+                          rdfs:label "Location primary code"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#LocationSubsidiaryCode
+tafp5:LocationSubsidiaryCode rdf:type owl:Class ;
+                             rdfs:subClassOf skos:Concept ;
+                             rdfs:label "Location subsidiary code"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#LocomotiveRole
+tafp5:LocomotiveRole rdf:type owl:Class ;
+                     rdfs:subClassOf tafp5:TractionProvisionRole ;
+                     rdfs:label "Locomotive role"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Message
+tafp5:Message rdf:type owl:Class ;
+              rdfs:subClassOf dul:InformationObject ,
+                              prov:Entity ,
+                              tafp5:OperationalEntity ;
+              rdfs:comment """Superclass for all messages exchanged in the context of the FP5 demo. Properties are from PROV-O (emitter, generation time) and full text (string, e.g. JSON snippet). The full text follows a schema not further specified here (TAF XSD or FP5-specific JSON schema, respectively).
+Message payloads are mostly Operational States or VersionedDescriptions."""@en ;
+              rdfs:label "Message"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#OTN
+tafp5:OTN rdf:type owl:Class ;
+          rdfs:comment "Operational Train Number. A train may bear different numbers along its course."@en ;
+          rdfs:label "OTN"@en ;
+          rdfs:seeAlso "http://data.europa.eu/949/OperationalTrainNumberIdentifier"^^xsd:anyURI .
+
+
+###  https://cdm.ovh/taf/tafp5#OperationalArtifact
+tafp5:OperationalArtifact rdf:type owl:Class ;
+                          rdfs:subClassOf dul:DesignedArtifact ,
+                                          tafp5:OperationalEntity ;
+                          rdfs:label "Operational artifact"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#OperationalEntity
+tafp5:OperationalEntity rdf:type owl:Class ;
+                        rdfs:comment "Abstract class for all things related to the process of operating a freight train"@en ;
+                        rdfs:label "Operational entity" .
+
+
+###  https://cdm.ovh/taf/tafp5#OperationalLocation
+tafp5:OperationalLocation rdf:type owl:Class ;
+                          rdfs:subClassOf dul:Place ,
+                                          tafp5:OperationalEntity ;
+                          rdfs:comment "TAF TSI ontology: identifies a Location using a LocationIdent"@en ;
+                          rdfs:label "Operational location"@en ;
+                          rdfs:seeAlso "http://data.europa.eu/949/Location"^^xsd:anyURI .
+
+
+###  https://cdm.ovh/taf/tafp5#OperationalRole
+tafp5:OperationalRole rdf:type owl:Class ;
+                      rdfs:subClassOf dul:Role ,
+                                      tafp5:OperationalEntity ;
+                      rdfs:comment "played by some Organization (Legal Entity)"@en ;
+                      rdfs:label "Operational role" .
+
+
+###  https://cdm.ovh/taf/tafp5#OperationalState
+tafp5:OperationalState rdf:type owl:Class ;
+                       rdfs:subClassOf dul:Situation ,
+                                       tafp5:OperationalEntity ;
+                       rdfs:comment "An operational state is a situation (in the sense of DUL). An operational is a typical payload of any operational message."@en ,
+                                    "Note: other states may concern yards, depots, stations... to be discussed."@en ;
+                       rdfs:label "Operational state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#PassengerRole
+tafp5:PassengerRole rdf:type owl:Class ;
+                    rdfs:subClassOf tafp5:LoadRole ;
+                    rdfs:label "Passenger role" .
+
+
+###  https://cdm.ovh/taf/tafp5#Path
+tafp5:Path rdf:type owl:Class ;
+           rdfs:subClassOf tafp5:PlannedJourneyOrPath ;
+           rdfs:label "Path"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#PlannedJourney
+tafp5:PlannedJourney rdf:type owl:Class ;
+                     rdfs:subClassOf tafp5:PlannedJourneyOrPath ;
+                     rdfs:comment "The planned journey may share the same JourneySchedule as the path, or deviate from it (e.g. deviations related to temporary speed restrictions, added or canceled stops). It may be updated after the train departure (in which case it gives rise to a forecast schedule, of a different class)."@en ;
+                     rdfs:label "Planned journey"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#PlannedJourneyOrPath
+tafp5:PlannedJourneyOrPath rdf:type owl:Class ;
+                           rdfs:subClassOf dul:Plan ,
+                                           tafp5:Journey ;
+                           rdfs:label "Planned journey or path"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#ReferenceOTN
+tafp5:ReferenceOTN rdf:type owl:Class ;
+                   rdfs:label "Reference OTN"@en ;
+                   rdfs:seeAlso "http://data.europa.eu/949/ReferenceOTN"^^xsd:anyURI .
+
+
+###  https://cdm.ovh/taf/tafp5#ServiceState
+tafp5:ServiceState rdf:type owl:Class ;
+                   rdfs:subClassOf tafp5:OperationalState ;
+                   rdfs:label "Service state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#StateAtTime
+tafp5:StateAtTime rdf:type owl:Class ;
+                  rdfs:comment "Note: no rules are currently defined to deal with the consistency between time and space indications."@en ,
+                               "Note: since it does not use dul:hasTimeInterval, reasoners will NOT infer that this is also a dul:Event."@en ,
+                               "Situation (Status) of a train or other entity, over some time extent."@en ,
+                               "a mixin class"@en ;
+                  rdfs:label "State at time" .
+
+
+###  https://cdm.ovh/taf/tafp5#SwapBody
+tafp5:SwapBody rdf:type owl:Class ;
+               rdfs:subClassOf tafp5:ITU ;
+               rdfs:label "Swap body"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TafMessage
+tafp5:TafMessage rdf:type owl:Class ;
+                 rdfs:subClassOf tafp5:Message ;
+                 owl:disjointWith tafp5:TransportCollaborationMessage ;
+                 rdfs:comment "Message compliant with TAF TSI XSD"@en ;
+                 rdfs:label "TAF message"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Track
+tafp5:Track rdf:type owl:Class ;
+            rdfs:subClassOf tafp5:OperationalArtifact ;
+            rdfs:comment "Note: atOperationalLocation is provided by superclass OperationalArtifact"@en ,
+                         "Track in the operational sense, i.e. a stretch of track, usually continuous, that is individuated in operating (driving, shunting) instructions."@en ;
+            rdfs:label "Track"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TractionProvisionRole
+tafp5:TractionProvisionRole rdf:type owl:Class ;
+                            rdfs:subClassOf dul:Role ,
+                                            tafp5:OperationalEntity ;
+                            rdfs:comment """Can be extended to include powered car or trailer roles.
+Case of hauled locomotive (fr: marchandise roulante) does not belong here, as no traction is provided.
+To be differetiated from (possible, not included) traction provider role, the agent being an organization in that case."""@en ,
+                                         "played by one or more locomotives on a train run"@en ;
+                            rdfs:label "Traction provision role" .
+
+
+###  https://cdm.ovh/taf/tafp5#Trailer
+tafp5:Trailer rdf:type owl:Class ;
+              rdfs:subClassOf tafp5:ITU ;
+              rdfs:label "Trailer"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Train
+tafp5:Train rdf:type owl:Class ;
+            rdfs:subClassOf rst_typ:RollingStock ,
+                            dul:PhysicalObject ,
+                            tafp5:OperationalArtifact ;
+            rdfs:comment "For want of a better class name: denotes the rolling stock (locos, wagons...) AND their supplies AND their (variable) loads, considered as a whole."@en ;
+            rdfs:label "Train"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainAttributeState
+tafp5:TrainAttributeState rdf:type owl:Class ;
+                          rdfs:subClassOf tafp5:TrainRunState ;
+                          owl:disjointWith tafp5:TrainLocationState ;
+                          rdfs:label "Train attribute state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainJourneyState
+tafp5:TrainJourneyState rdf:type owl:Class ;
+                        rdfs:subClassOf tafp5:StateAtTime ,
+                                        tafp5:TrainRunState ;
+                        rdfs:label "Train journey state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainLocationState
+tafp5:TrainLocationState rdf:type owl:Class ;
+                         rdfs:subClassOf tafp5:StateAtTime ,
+                                         tafp5:TrainRunState ;
+                         rdfs:label "Train location state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainMassState
+tafp5:TrainMassState rdf:type owl:Class ;
+                     rdfs:subClassOf tafp5:StateAtTime ,
+                                     tafp5:TrainAttributeState ;
+                     owl:disjointWith tafp5:TrainMotionState ;
+                     rdfs:comment "Laden mass, incl. supplies"@en ;
+                     rdfs:label "Train mass state"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainMotionState
+tafp5:TrainMotionState rdf:type owl:Class ;
+                       rdfs:subClassOf tafp5:StateAtTime ,
+                                       tafp5:TrainAttributeState ;
+                       rdfs:label "Train motion state" .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainOperator
+tafp5:TrainOperator rdf:type owl:Class ;
+                    rdfs:subClassOf tafp5:OperationalRole ;
+                    rdfs:label "Train operator"@en ;
+                    rdfs:seeAlso "No matching class in TAF TSI 0.2 ontology. RU is identified bny a data property with no specified range."@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainRun
+tafp5:TrainRun rdf:type owl:Class ;
+               rdfs:subClassOf dul:Process ,
+                               tafp5:OperationalEntity ;
+               rdfs:comment "Denotes a train run (operated on a particular date), equivalent to \"Train\" in TAF TSI, not a \"timetable entry\"."@en ;
+               rdfs:label "Train run" .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainRunState
+tafp5:TrainRunState rdf:type owl:Class ;
+                    rdfs:subClassOf tafp5:OperationalState ;
+                    rdfs:comment "Situation (State) of a train run. Supposed to hold anywhere and anytime during the train run."@en ;
+                    rdfs:label "Train run state" .
+
+
+###  https://cdm.ovh/taf/tafp5#TransportCollaborationMessage
+tafp5:TransportCollaborationMessage rdf:type owl:Class ;
+                                    rdfs:subClassOf tafp5:Message ;
+                                    rdfs:comment "FP5-specific messages"@en ;
+                                    rdfs:label "Transport collaboration message"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#UnregulatedTrain
+tafp5:UnregulatedTrain rdf:type owl:Class ;
+                       rdfs:subClassOf tafp5:PlannedJourneyOrPath ;
+                       rdfs:label "Unregulated train run. \" Unregulated train\"  might be the correct expression in EN-speaking areas (check). At SNCF, was called \" marche indeterminee (abbr. MI)\", which is more to the point as \" marche\" evokes journey execution rather than train." .
+
+
+###  https://cdm.ovh/taf/tafp5#VersionedDescription
+tafp5:VersionedDescription rdf:type owl:Class ;
+                           rdfs:subClassOf dul:Description ,
+                                           prov:Entity ,
+                                           tafp5:OperationalEntity ;
+                           rdfs:comment "A description (e.g. of a schedule, or other operational specs such as orders issued to drivers) that can be revised, and is effective (= applicable) from a certain datetime. The versions are chained as a simple list (nop forks, no loops)."@en ;
+                           rdfs:label "Versioned description" .
+
+
+###  https://cdm.ovh/taf/tafp5#Wagon
+tafp5:Wagon rdf:type owl:Class ;
+            rdfs:subClassOf rst_typ:Wagon ,
+                            tafp5:OperationalArtifact ;
+            rdfs:label "Wagon"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://cdm.ovh/taf/tafp5#FacilityRoleOrFunctionScheme
+tafp5:FacilityRoleOrFunctionScheme rdf:type owl:NamedIndividual ,
+                                            skos:ConceptScheme ;
+                                   rdfs:label "Facility role or function scheme"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Workshop
+tafp5:Workshop rdf:type owl:NamedIndividual ,
+                        tafp5:FacilityRoleOrFunction ;
+               skos:inScheme tafp5:FacilityRoleOrFunctionScheme ;
+               rdfs:label "Workshop"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#Yard
+tafp5:Yard rdf:type owl:NamedIndividual ,
+                    tafp5:FacilityRoleOrFunction ;
+           skos:inScheme tafp5:FacilityRoleOrFunctionScheme ;
+           rdfs:label "Yard"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#asFreight
+tafp5:asFreight rdf:type owl:NamedIndividual ,
+                         tafp5:FreightRole ;
+                rdfs:label "as freight"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#asPassenger
+tafp5:asPassenger rdf:type owl:NamedIndividual ,
+                           tafp5:PassengerRole ;
+                  rdfs:label "as passenger"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#controlledLocomotiveRole
+tafp5:controlledLocomotiveRole rdf:type owl:NamedIndividual ,
+                                        tafp5:LocomotiveRole ;
+                               rdfs:label "controlled locomotive role" .
+
+
+###  https://cdm.ovh/taf/tafp5#leadingLocomotiveRole
+tafp5:leadingLocomotiveRole rdf:type owl:NamedIndividual ,
+                                     tafp5:LocomotiveRole ;
+                            rdfs:label "leading locomotive role" .
+
+
+###  https://cdm.ovh/taf/tafp5#locomotiveRole
+tafp5:locomotiveRole rdf:type owl:NamedIndividual ,
+                              tafp5:LocomotiveRole ;
+                     rdfs:label "locomotive role"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:AdministrativeState
+                tafp5:CarrierState
+                tafp5:LoadState
+                tafp5:ServiceState
+                tafp5:TrainRunState
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:Container
+                tafp5:SwapBody
+                tafp5:Trailer
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:Facility
+                tafp5:ITU
+                tafp5:Track
+                tafp5:Train
+                tafp5:Wagon
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:ForecastJourney
+                tafp5:Path
+                tafp5:PlannedJourney
+                tafp5:UnregulatedTrain
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:ITU
+                tafp5:TrainRun
+                tafp5:Wagon
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:Image
+                tafp5:LoadRole
+                tafp5:Message
+                tafp5:OperationalArtifact
+                tafp5:OperationalLocation
+                tafp5:OperationalRole
+                tafp5:OperationalState
+                tafp5:TractionProvisionRole
+                tafp5:TrainRun
+                tafp5:VersionedDescription
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29) https://github.com/owlcs/owlapi
