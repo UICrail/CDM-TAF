@@ -465,9 +465,6 @@
           <value>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody</value>
         </iri>
         <iri>
-          <value>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject</value>
-        </iri>
-        <iri>
           <value>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace</value>
         </iri>
         <iri>
@@ -3618,11 +3615,6 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <iri>https://cdm.ovh/taf/tafp5#VersionedDescription</iri>
           <label x="90" customSize="0" size="12" height="23" width="165" y="552"/>
         </node>
-        <node color="#c2b078" id="n39" type="concept">
-          <geometry x="-120" height="50" width="140" y="-10"/>
-          <iri>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject</iri>
-          <label x="-120" customSize="0" size="12" height="23" width="140" y="-10"/>
-        </node>
         <node color="#c2b078" id="n4" type="concept">
           <geometry x="-120" height="50" width="145" y="-170"/>
           <iri>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process</iri>
@@ -3752,10 +3744,6 @@ To be differetiated from (possible, not included) traction provider role, the ag
         <edge target="n36" source="n37" id="e52" type="inclusion">
           <point x="90" y="560"/>
           <point x="-120" y="560"/>
-        </edge>
-        <edge target="n39" source="n27" id="e54" type="inclusion">
-          <point x="60" y="-10"/>
-          <point x="-120" y="-10"/>
         </edge>
         <edge target="n5" source="n3" id="e6" type="input">
           <point x="60" y="-170"/>
