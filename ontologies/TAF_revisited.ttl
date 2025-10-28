@@ -112,15 +112,20 @@ prov:wasRevisionOf rdf:type owl:ObjectProperty .
 tafp5:atOperationalLocation rdf:type owl:ObjectProperty ;
                             rdfs:subPropertyOf dul:hasLocation ;
                             owl:inverseOf tafp5:isOperationalLocationOf ;
-                            rdfs:domain tafp5:OperationalArtifact ,
-                                        tafp5:TrainLocationState ;
+                            rdfs:domain tafp5:TrainLocationState ,
+                                        [ rdf:type owl:Class ;
+                                          owl:unionOf ( tafp5:Facility
+                                                        tafp5:Track
+                                                      )
+                                        ] ;
                             rdfs:range tafp5:OperationalLocation ;
+                            rdfs:comment "For time-independent locations (e.g. of Facilities)"@en ;
                             rdfs:label "at operational location"^^xsd:language .
 
 
 ###  https://cdm.ovh/taf/tafp5#atTimeInstant
 tafp5:atTimeInstant rdf:type owl:ObjectProperty ;
-                    rdfs:domain tafp5:StateAtTime ;
+                    rdfs:domain tafp5:OperationalState ;
                     rdfs:range time:Instant ;
                     rdfs:label "at time instant"@en .
 
@@ -222,7 +227,7 @@ tafp5:hasSubsidiaryCode rdf:type owl:ObjectProperty ,
 
 ###  https://cdm.ovh/taf/tafp5#hasTimeExtent
 tafp5:hasTimeExtent rdf:type owl:ObjectProperty ;
-                    rdfs:domain tafp5:StateAtTime ;
+                    rdfs:domain tafp5:OperationalState ;
                     rdfs:range time:TemporalEntity ;
                     rdfs:label "has time extent" .
 
@@ -623,7 +628,6 @@ prov:Entity rdf:type owl:Class .
 
 ###  https://cdm.ovh/taf/tafp5#AdministrativeState
 tafp5:AdministrativeState rdf:type owl:Class ;
-                          rdfs:subClassOf tafp5:OperationalState ;
                           rdfs:label "Administrative state"@en .
 
 
@@ -636,7 +640,6 @@ tafp5:CargoCarrier rdf:type owl:Class ;
 
 ###  https://cdm.ovh/taf/tafp5#CarrierState
 tafp5:CarrierState rdf:type owl:Class ;
-                   rdfs:subClassOf tafp5:OperationalState ;
                    rdfs:label "Carrier state"@en .
 
 
@@ -657,6 +660,7 @@ tafp5:ExecutedJourney rdf:type owl:Class ;
 ###  https://cdm.ovh/taf/tafp5#Facility
 tafp5:Facility rdf:type owl:Class ;
                rdfs:subClassOf tafp5:OperationalArtifact ;
+               owl:disjointWith tafp5:Track ;
                rdfs:label "Facility"@en .
 
 
@@ -736,22 +740,22 @@ tafp5:LoadRole rdf:type owl:Class ;
 
 ###  https://cdm.ovh/taf/tafp5#LoadState
 tafp5:LoadState rdf:type owl:Class ;
-                rdfs:subClassOf tafp5:OperationalState ,
+                rdfs:subClassOf tafp5:TrainRunState ,
                                 [ rdf:type owl:Restriction ;
                                   owl:onProperty dul:hasTimeInterval ;
-                                  owl:someValuesFrom time:Interval
+                                  owl:allValuesFrom time:Interval
                                 ] ,
                                 [ rdf:type owl:Restriction ;
                                   owl:onProperty dul:isClassifiedBy ;
-                                  owl:someValuesFrom tafp5:FreightRole
+                                  owl:allValuesFrom tafp5:FreightRole
                                 ] ,
                                 [ rdf:type owl:Restriction ;
                                   owl:onProperty dul:isSettingFor ;
-                                  owl:someValuesFrom tafp5:ITU
+                                  owl:allValuesFrom tafp5:ITU
                                 ] ,
                                 [ rdf:type owl:Restriction ;
                                   owl:onProperty dul:isSettingFor ;
-                                  owl:someValuesFrom tafp5:Wagon
+                                  owl:allValuesFrom tafp5:Wagon
                                 ] ;
                 rdfs:label "Load state"@en .
 
@@ -864,17 +868,7 @@ tafp5:ReferenceOTN rdf:type owl:Class ;
 
 ###  https://cdm.ovh/taf/tafp5#ServiceState
 tafp5:ServiceState rdf:type owl:Class ;
-                   rdfs:subClassOf tafp5:OperationalState ;
                    rdfs:label "Service state"@en .
-
-
-###  https://cdm.ovh/taf/tafp5#StateAtTime
-tafp5:StateAtTime rdf:type owl:Class ;
-                  rdfs:comment "Note: no rules are currently defined to deal with the consistency between time and space indications."@en ,
-                               "Note: since it does not use dul:hasTimeInterval, reasoners will NOT infer that this is also a dul:Event."@en ,
-                               "Situation (Status) of a train or other entity, over some time extent."@en ,
-                               "a mixin class"@en ;
-                  rdfs:label "State at time" .
 
 
 ###  https://cdm.ovh/taf/tafp5#SwapBody
@@ -924,31 +918,22 @@ tafp5:Train rdf:type owl:Class ;
             rdfs:label "Train"@en .
 
 
-###  https://cdm.ovh/taf/tafp5#TrainAttributeState
-tafp5:TrainAttributeState rdf:type owl:Class ;
-                          rdfs:subClassOf tafp5:TrainRunState ;
-                          owl:disjointWith tafp5:TrainLocationState ;
-                          rdfs:label "Train attribute state"@en .
-
-
 ###  https://cdm.ovh/taf/tafp5#TrainJourneyState
 tafp5:TrainJourneyState rdf:type owl:Class ;
-                        rdfs:subClassOf tafp5:StateAtTime ,
-                                        tafp5:TrainRunState ;
+                        rdfs:subClassOf tafp5:TrainRunState ;
+                        owl:disjointWith tafp5:TrainLocationState ;
                         rdfs:label "Train journey state"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#TrainLocationState
 tafp5:TrainLocationState rdf:type owl:Class ;
-                         rdfs:subClassOf tafp5:StateAtTime ,
-                                         tafp5:TrainRunState ;
+                         rdfs:subClassOf tafp5:TrainRunState ;
                          rdfs:label "Train location state"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#TrainMassState
 tafp5:TrainMassState rdf:type owl:Class ;
-                     rdfs:subClassOf tafp5:StateAtTime ,
-                                     tafp5:TrainAttributeState ;
+                     rdfs:subClassOf tafp5:TrainState ;
                      owl:disjointWith tafp5:TrainMotionState ;
                      rdfs:comment "Laden mass, incl. supplies"@en ;
                      rdfs:label "Train mass state"@en .
@@ -956,8 +941,7 @@ tafp5:TrainMassState rdf:type owl:Class ;
 
 ###  https://cdm.ovh/taf/tafp5#TrainMotionState
 tafp5:TrainMotionState rdf:type owl:Class ;
-                       rdfs:subClassOf tafp5:StateAtTime ,
-                                       tafp5:TrainAttributeState ;
+                       rdfs:subClassOf tafp5:TrainState ;
                        rdfs:label "Train motion state" .
 
 
@@ -984,8 +968,16 @@ tafp5:TrainRunState rdf:type owl:Class ;
                                       owl:onProperty tafp5:isStateOfTrainRun ;
                                       owl:someValuesFrom owl:Thing
                                     ] ;
-                    rdfs:comment "Situation (State) of a train run."@en ;
+                    owl:disjointWith tafp5:TrainState ;
+                    rdfs:comment "Situation (State) of a train run. Several subclasses define the train run state from several points of view."@en ;
                     rdfs:label "Train run state" .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainState
+tafp5:TrainState rdf:type owl:Class ;
+                 rdfs:subClassOf tafp5:OperationalState ;
+                 rdfs:comment "Characterizes the state of the Train (as a physical asset), e.g. speed, mass, GPS coordinates of some particular point of the train, etc."@en ;
+                 rdfs:label "Train state"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#TransportCollaborationMessage
@@ -1076,16 +1068,6 @@ tafp5:locomotiveRole rdf:type owl:NamedIndividual ,
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( tafp5:AdministrativeState
-                tafp5:CarrierState
-                tafp5:LoadState
-                tafp5:ServiceState
-                tafp5:TrainRunState
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
   owl:members ( tafp5:Container
                 tafp5:SwapBody
                 tafp5:Trailer
@@ -1131,6 +1113,14 @@ tafp5:locomotiveRole rdf:type owl:NamedIndividual ,
                 tafp5:TractionProvisionRole
                 tafp5:TrainRun
                 tafp5:VersionedDescription
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:LoadState
+                tafp5:TrainJourneyState
+                tafp5:TrainLocationState
               )
 ] .
 
