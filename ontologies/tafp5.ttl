@@ -130,6 +130,14 @@ tafp5:atTimeInstant rdf:type owl:ObjectProperty ;
                     rdfs:label "at time instant"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#hasComposition
+tafp5:hasComposition rdf:type owl:ObjectProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain tafp5:TrainCompositionState ;
+                     rdfs:range rst_typ:RollingStock ;
+                     rdfs:label "has composition"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#hasDestination
 tafp5:hasDestination rdf:type owl:ObjectProperty ,
                               owl:FunctionalProperty ;
@@ -232,10 +240,26 @@ tafp5:hasTimeExtent rdf:type owl:ObjectProperty ;
                     rdfs:label "has time extent" .
 
 
+###  https://cdm.ovh/taf/tafp5#hasTrain
+tafp5:hasTrain rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain tafp5:TrainRun ;
+               rdfs:range tafp5:Train ;
+               rdfs:label "has train"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#hasTrainRunState
 tafp5:hasTrainRunState rdf:type owl:ObjectProperty ,
                                 owl:InverseFunctionalProperty ;
                        rdfs:label "has train run state" .
+
+
+###  https://cdm.ovh/taf/tafp5#hasTrainState
+tafp5:hasTrainState rdf:type owl:ObjectProperty ,
+                             owl:InverseFunctionalProperty ;
+                    rdfs:domain tafp5:Train ;
+                    rdfs:range tafp5:TrainState ;
+                    rdfs:label "has train state"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#inJourneySchedule
@@ -915,10 +939,15 @@ tafp5:Trailer rdf:type owl:Class ;
 
 ###  https://cdm.ovh/taf/tafp5#Train
 tafp5:Train rdf:type owl:Class ;
-            rdfs:subClassOf rst_typ:RollingStock ,
-                            tafp5:OperationalArtifact ;
-            rdfs:comment "For want of a better class name: denotes the rolling stock (locos, wagons...) AND their supplies AND their (variable) loads, considered as a whole."@en ;
+            rdfs:subClassOf tafp5:OperationalArtifact ;
+            rdfs:comment "For want of a better class name: denotes the rolling stock (locos, wagons...) AND their supplies (possibly depleted) AND their (variable) loads, considered as a whole, i.e. whatever is moved somewhere between origin and destination in a Train run."@en ;
             rdfs:label "Train"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainCompositionState
+tafp5:TrainCompositionState rdf:type owl:Class ;
+                            rdfs:subClassOf tafp5:TrainState ;
+                            rdfs:label "Train composition state"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#TrainJourneyState
@@ -937,7 +966,6 @@ tafp5:TrainLocationState rdf:type owl:Class ;
 ###  https://cdm.ovh/taf/tafp5#TrainMassState
 tafp5:TrainMassState rdf:type owl:Class ;
                      rdfs:subClassOf tafp5:TrainState ;
-                     owl:disjointWith tafp5:TrainMotionState ;
                      rdfs:comment "Laden mass, incl. supplies"@en ;
                      rdfs:label "Train mass state"@en .
 
@@ -1126,6 +1154,14 @@ tafp5:locomotiveRole rdf:type owl:NamedIndividual ,
                 tafp5:TractionProvisionRole
                 tafp5:TrainRun
                 tafp5:VersionedDescription
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( tafp5:TrainCompositionState
+                tafp5:TrainMassState
+                tafp5:TrainMotionState
               )
 ] .
 
