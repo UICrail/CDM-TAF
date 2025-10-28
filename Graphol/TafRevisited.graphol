@@ -2464,11 +2464,20 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <annotations>
             <annotation>
               <subject>https://cdm.ovh/taf/tafp5#UnregulatedTrain</subject>
-              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
               <object>
                 <lexicalForm>Unregulated train run. " Unregulated train"  might be the correct expression in EN-speaking areas (check). At SNCF, was called " marche indeterminee (abbr. MI)", which is more to the point as " marche" evokes journey execution rather than train.</lexicalForm>
                 <datatype>http://www.w3.org/2001/XMLSchema#string</datatype>
                 <language/>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#UnregulatedTrain</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Unregulated train run</lexicalForm>
+                <datatype/>
+                <language>en</language>
               </object>
             </annotation>
           </annotations>
@@ -3912,6 +3921,24 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <iri>https://cdm.ovh/taf/tafp5#Train</iri>
           <label width="110" customSize="0" y="-2010" height="23" x="-1410" size="12"/>
         </node>
+        <node type="concept" id="n44" color="#fcfcfc">
+          <geometry width="110" y="-1940" height="50" x="-1410"/>
+          <iri>https://cdm.ovh/taf/tafp5#Journey</iri>
+          <label width="110" customSize="0" y="-1940" height="23" x="-1410" size="12"/>
+        </node>
+        <node type="domain-restriction" id="n45" color="#fcfcfc">
+          <geometry width="20" y="-1940" height="20" x="-1730"/>
+          <label width="39" customSize="0" y="-1962" height="23" x="-1730" size="12">exists</label>
+        </node>
+        <node type="range-restriction" id="n46" color="#000000">
+          <geometry width="20" y="-1940" height="20" x="-1530"/>
+          <label width="39" customSize="0" y="-1962" height="23" x="-1530" size="12">exists</label>
+        </node>
+        <node type="role" id="n47" color="#fcfcfc">
+          <geometry width="70" y="-1940" height="50" x="-1630"/>
+          <iri>https://cdm.ovh/taf/tafp5#hasJourney</iri>
+          <label width="69" customSize="0" y="-1970" height="23" x="-1630" size="12"/>
+        </node>
         <node type="role" id="n6" color="#fcfcfc">
           <geometry width="70" y="-2140" height="50" x="-1630"/>
           <iri>https://cdm.ovh/taf/tafp5#trainOperatingRU</iri>
@@ -4030,6 +4057,22 @@ To be differetiated from (possible, not included) traction provider role, the ag
         <edge type="inclusion" source="n41" target="n43" id="e47">
           <point y="-2010" x="-1530"/>
           <point y="-2010" x="-1410"/>
+        </edge>
+        <edge type="inclusion" source="n45" target="n0" id="e48">
+          <point y="-1940" x="-1730"/>
+          <point y="-2180" x="-1890"/>
+        </edge>
+        <edge type="inclusion" source="n46" target="n44" id="e49">
+          <point y="-1940" x="-1530"/>
+          <point y="-1940" x="-1410"/>
+        </edge>
+        <edge type="input" source="n47" target="n46" id="e50">
+          <point y="-1940" x="-1630"/>
+          <point y="-1940" x="-1530"/>
+        </edge>
+        <edge type="input" source="n47" target="n45" id="e51">
+          <point y="-1940" x="-1630"/>
+          <point y="-1940" x="-1730"/>
         </edge>
         <edge type="input" source="n6" target="n8" id="e8">
           <point y="-2140" x="-1630"/>
@@ -5033,184 +5076,180 @@ To be differetiated from (possible, not included) traction provider role, the ag
       </diagram>
       <diagram width="5000" height="5000" name="12a - Journey">
         <node type="concept" id="n0" color="#fcfcfc">
-          <geometry width="175" y="30" height="50" x="810"/>
+          <geometry width="175" y="30" height="50" x="380"/>
           <iri>https://cdm.ovh/taf/tafp5#JourneySchedule</iri>
-          <label width="175" customSize="0" y="22" height="23" x="810" size="12"/>
+          <label width="175" customSize="0" y="22" height="23" x="380" size="12"/>
         </node>
         <node type="concept" id="n1" color="#fcfcfc">
-          <geometry width="145" y="460" height="50" x="210"/>
+          <geometry width="145" y="450" height="50" x="210"/>
           <iri>https://cdm.ovh/taf/tafp5#PlannedJourney</iri>
-          <label width="145" customSize="0" y="460" height="23" x="210" size="12"/>
+          <label width="145" customSize="0" y="450" height="23" x="210" size="12"/>
         </node>
         <node type="domain-restriction" id="n10" color="#fcfcfc">
-          <geometry width="20" y="30" height="20" x="470"/>
-          <label width="39" customSize="0" y="8" height="23" x="470" size="12">exists</label>
+          <geometry width="20" y="30" height="20" x="40"/>
+          <label width="39" customSize="0" y="8" height="23" x="40" size="12">exists</label>
         </node>
         <node type="range-restriction" id="n11" color="#000000">
-          <geometry width="20" y="30" height="20" x="680"/>
-          <label width="39" customSize="0" y="8" height="23" x="680" size="12">exists</label>
+          <geometry width="20" y="30" height="20" x="250"/>
+          <label width="39" customSize="0" y="8" height="23" x="250" size="12">exists</label>
         </node>
         <node type="disjoint-union" id="n17" color="#000000">
-          <geometry width="50" y="140" height="30" x="370"/>
+          <geometry width="50" y="120" height="30" x="-60"/>
         </node>
         <node type="concept" id="n2" color="#fcfcfc">
-          <geometry width="150" y="330" height="50" x="800"/>
+          <geometry width="150" y="320" height="50" x="-410"/>
           <iri>https://cdm.ovh/taf/tafp5#ExecutedJourney</iri>
-          <label width="150" customSize="0" y="330" height="23" x="800" size="12"/>
+          <label width="150" customSize="0" y="320" height="23" x="-410" size="12"/>
         </node>
         <node type="concept" id="n23" color="#fcfcfc">
-          <geometry width="210" y="330" height="50" x="250"/>
+          <geometry width="210" y="320" height="50" x="250"/>
           <iri>https://cdm.ovh/taf/tafp5#PlannedJourneyOrPath</iri>
-          <label width="210" customSize="0" y="330" height="23" x="250" size="12"/>
+          <label width="210" customSize="0" y="320" height="23" x="250" size="12"/>
         </node>
         <node type="disjoint-union" id="n24" color="#000000">
-          <geometry width="50" y="390" height="30" x="250"/>
+          <geometry width="50" y="380" height="30" x="250"/>
         </node>
         <node type="concept" id="n3" color="#fcfcfc">
-          <geometry width="110" y="460" height="50" x="60"/>
+          <geometry width="110" y="450" height="50" x="60"/>
           <iri>https://cdm.ovh/taf/tafp5#Path</iri>
-          <label width="110" customSize="0" y="460" height="23" x="60" size="12"/>
+          <label width="110" customSize="0" y="450" height="23" x="60" size="12"/>
         </node>
         <node type="concept" id="n34" color="#fcfcfc">
-          <geometry width="165" y="-110" height="50" x="570"/>
+          <geometry width="165" y="-110" height="50" x="140"/>
           <iri>https://cdm.ovh/taf/tafp5#VersionedDescription</iri>
-          <label width="165" customSize="0" y="-110" height="23" x="570" size="12"/>
+          <label width="165" customSize="0" y="-110" height="23" x="140" size="12"/>
         </node>
         <node type="concept" id="n35" color="#fcfcfc">
-          <geometry width="145" y="460" height="50" x="380"/>
+          <geometry width="145" y="450" height="50" x="380"/>
           <iri>https://cdm.ovh/taf/tafp5#ForecastJourney</iri>
-          <label width="145" customSize="0" y="460" height="23" x="380" size="12"/>
+          <label width="145" customSize="0" y="450" height="23" x="380" size="12"/>
         </node>
         <node type="role" id="n36" color="#fcfcfc">
-          <geometry width="70" y="330" height="50" x="530"/>
+          <geometry width="70" y="320" height="50" x="-80"/>
           <iri>https://cdm.ovh/taf/tafp5#realizesPlannedJourneyOrPath</iri>
-          <label width="171" customSize="0" y="300" height="23" x="530" size="12"/>
+          <label width="171" customSize="0" y="290" height="23" x="-80" size="12"/>
         </node>
         <node type="domain-restriction" id="n37" color="#fcfcfc">
-          <geometry width="20" y="330" height="20" x="640"/>
-          <label width="39" customSize="0" y="308" height="23" x="640" size="12">exists</label>
+          <geometry width="20" y="320" height="20" x="-250"/>
+          <label width="39" customSize="0" y="298" height="23" x="-250" size="12">exists</label>
         </node>
         <node type="range-restriction" id="n38" color="#000000">
-          <geometry width="20" y="330" height="20" x="410"/>
-          <label width="39" customSize="0" y="308" height="23" x="410" size="12">exists</label>
+          <geometry width="20" y="320" height="20" x="80"/>
+          <label width="39" customSize="0" y="298" height="23" x="80" size="12">exists</label>
         </node>
         <node type="concept" id="n39" color="#fcfcfc">
-          <geometry width="155" y="460" height="50" x="552"/>
+          <geometry width="147" y="450" height="50" x="550"/>
           <iri>https://cdm.ovh/taf/tafp5#UnregulatedTrain</iri>
-          <label width="155" customSize="0" y="452" height="68" x="552" size="12"/>
+          <label width="147" customSize="0" y="442" height="23" x="542" size="12"/>
         </node>
         <node type="concept" id="n4" color="#c2b078">
-          <geometry width="110" y="220" height="50" x="210"/>
+          <geometry width="110" y="210" height="50" x="250"/>
           <iri>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan</iri>
-          <label width="110" customSize="0" y="220" height="23" x="210" size="12"/>
+          <label width="110" customSize="0" y="210" height="23" x="250" size="12"/>
         </node>
         <node type="role" id="n40" color="#c2b078">
-          <geometry width="70" y="250" height="50" x="530"/>
+          <geometry width="70" y="220" height="50" x="-80"/>
           <iri>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes</iri>
-          <label width="68" customSize="0" y="220" height="23" x="530" size="12"/>
+          <label width="68" customSize="0" y="190" height="23" x="-80" size="12"/>
         </node>
         <node type="concept" id="n5" color="#c2b078">
-          <geometry width="110" y="150" height="50" x="800"/>
+          <geometry width="110" y="210" height="50" x="-410"/>
           <iri>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process</iri>
-          <label width="110" customSize="0" y="150" height="23" x="800" size="12"/>
+          <label width="110" customSize="0" y="210" height="23" x="-410" size="12"/>
         </node>
         <node type="concept" id="n6" color="#fcfcfc">
-          <geometry width="110" y="30" height="50" x="370"/>
+          <geometry width="110" y="30" height="50" x="-60"/>
           <iri>https://cdm.ovh/taf/tafp5#Journey</iri>
-          <label width="110" customSize="0" y="30" height="23" x="370" size="12"/>
+          <label width="110" customSize="0" y="30" height="23" x="-60" size="12"/>
         </node>
         <node type="role" id="n9" color="#fcfcfc">
-          <geometry width="70" y="30" height="50" x="580"/>
+          <geometry width="70" y="30" height="50" x="150"/>
           <iri>https://cdm.ovh/taf/tafp5#hasJourneySchedule</iri>
-          <label width="120" customSize="0" y="0" height="23" x="580" size="12"/>
+          <label width="120" customSize="0" y="0" height="23" x="150" size="12"/>
         </node>
         <edge type="inclusion" source="n2" target="n5" id="e1">
-          <point y="330" x="800"/>
-          <point y="150" x="800"/>
+          <point y="320" x="-410"/>
+          <point y="210" x="-410"/>
         </edge>
         <edge type="input" source="n9" target="n11" id="e10">
-          <point y="30" x="580"/>
-          <point y="30" x="680"/>
+          <point y="30" x="150"/>
+          <point y="30" x="250"/>
         </edge>
         <edge type="input" source="n9" target="n10" id="e11">
-          <point y="30" x="580"/>
-          <point y="30" x="470"/>
+          <point y="30" x="150"/>
+          <point y="30" x="40"/>
         </edge>
         <edge type="inclusion" source="n17" target="n6" id="e19">
-          <point y="140" x="370"/>
-          <point y="30" x="370"/>
+          <point y="120" x="-60"/>
+          <point y="30" x="-60"/>
         </edge>
         <edge type="input" source="n2" target="n17" id="e22">
-          <point y="305" x="760"/>
-          <point y="200" x="760"/>
-          <point y="200" x="370"/>
-          <point y="140" x="370"/>
-        </edge>
-        <edge type="inclusion" source="n23" target="n4" id="e28">
-          <point y="305" x="206"/>
-          <point y="220" x="210"/>
+          <point y="295" x="-362"/>
+          <point y="120" x="-60"/>
         </edge>
         <edge type="input" source="n23" target="n17" id="e29">
-          <point y="305" x="290"/>
-          <point y="200" x="290"/>
-          <point y="200" x="360"/>
-          <point y="140" x="370"/>
+          <point y="295" x="192"/>
+          <point y="120" x="-60"/>
         </edge>
         <edge type="input" source="n3" target="n24" id="e30">
-          <point y="460" x="60"/>
-          <point y="390" x="250"/>
+          <point y="450" x="60"/>
+          <point y="380" x="250"/>
         </edge>
         <edge type="input" source="n1" target="n24" id="e31">
-          <point y="460" x="210"/>
-          <point y="390" x="250"/>
+          <point y="450" x="210"/>
+          <point y="380" x="250"/>
         </edge>
         <edge type="inclusion" source="n24" target="n23" id="e32">
-          <point y="390" x="250"/>
-          <point y="330" x="250"/>
+          <point y="380" x="250"/>
+          <point y="320" x="250"/>
         </edge>
         <edge type="inclusion" source="n6" target="n34" id="e48">
-          <point y="30" x="370"/>
-          <point y="-110" x="570"/>
+          <point y="30" x="-60"/>
+          <point y="-110" x="140"/>
         </edge>
         <edge type="inclusion" source="n0" target="n34" id="e49">
-          <point y="30" x="810"/>
-          <point y="-110" x="570"/>
+          <point y="30" x="380"/>
+          <point y="-110" x="140"/>
         </edge>
         <edge type="input" source="n35" target="n24" id="e50">
-          <point y="460" x="380"/>
-          <point y="390" x="250"/>
+          <point y="450" x="380"/>
+          <point y="380" x="250"/>
         </edge>
         <edge type="inclusion" source="n37" target="n2" id="e51">
-          <point y="330" x="640"/>
-          <point y="330" x="800"/>
+          <point y="320" x="-250"/>
+          <point y="320" x="-410"/>
         </edge>
         <edge type="inclusion" source="n38" target="n23" id="e52">
-          <point y="330" x="410"/>
-          <point y="330" x="250"/>
+          <point y="320" x="80"/>
+          <point y="320" x="250"/>
         </edge>
         <edge type="input" source="n36" target="n37" id="e53">
-          <point y="330" x="530"/>
-          <point y="330" x="640"/>
+          <point y="320" x="-80"/>
+          <point y="320" x="-250"/>
         </edge>
         <edge type="input" source="n36" target="n38" id="e54">
-          <point y="330" x="530"/>
-          <point y="330" x="410"/>
+          <point y="320" x="-80"/>
+          <point y="320" x="80"/>
         </edge>
         <edge type="input" source="n39" target="n24" id="e55">
-          <point y="460" x="552"/>
-          <point y="390" x="250"/>
+          <point y="450" x="550"/>
+          <point y="380" x="250"/>
         </edge>
         <edge type="inclusion" source="n36" target="n40" id="e56">
-          <point y="330" x="530"/>
-          <point y="250" x="530"/>
+          <point y="320" x="-80"/>
+          <point y="220" x="-80"/>
+        </edge>
+        <edge type="inclusion" source="n23" target="n4" id="e57">
+          <point y="320" x="250"/>
+          <point y="210" x="250"/>
         </edge>
         <edge type="inclusion" source="n11" target="n0" id="e8">
-          <point y="30" x="680"/>
-          <point y="30" x="810"/>
+          <point y="30" x="250"/>
+          <point y="30" x="380"/>
         </edge>
         <edge type="inclusion" source="n10" target="n6" id="e9">
-          <point y="30" x="470"/>
-          <point y="30" x="370"/>
+          <point y="30" x="40"/>
+          <point y="30" x="-60"/>
         </edge>
       </diagram>
       <diagram width="5000" height="5000" name="12b - Journey Schedule">

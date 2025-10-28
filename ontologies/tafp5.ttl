@@ -156,7 +156,8 @@ tafp5:hasFacilityFunction rdf:type owl:ObjectProperty ;
 
 ###  https://cdm.ovh/taf/tafp5#hasJourney
 tafp5:hasJourney rdf:type owl:ObjectProperty ;
-                 rdfs:domain tafp5:TrainJourneyState ;
+                 rdfs:domain tafp5:TrainJourneyState ,
+                             tafp5:TrainRun ;
                  rdfs:range tafp5:Journey ;
                  rdfs:comment "not a functional property, as it can be expressed w.r.t. the planned journey or the executed journey (if available). User feedback welcome."@en ;
                  rdfs:label "has journey" .
@@ -1020,7 +1021,8 @@ tafp5:TransportCollaborationMessage rdf:type owl:Class ;
 ###  https://cdm.ovh/taf/tafp5#UnregulatedTrain
 tafp5:UnregulatedTrain rdf:type owl:Class ;
                        rdfs:subClassOf tafp5:PlannedJourneyOrPath ;
-                       rdfs:label "Unregulated train run. \" Unregulated train\"  might be the correct expression in EN-speaking areas (check). At SNCF, was called \" marche indeterminee (abbr. MI)\", which is more to the point as \" marche\" evokes journey execution rather than train." .
+                       rdfs:comment "Unregulated train run. \" Unregulated train\"  might be the correct expression in EN-speaking areas (check). At SNCF, was called \" marche indeterminee (abbr. MI)\", which is more to the point as \" marche\" evokes journey execution rather than train." ;
+                       rdfs:label "Unregulated train run"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#VersionedDescription
