@@ -68,16 +68,7 @@ list:previousItem rdf:type owl:ObjectProperty .
 
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation
 dul:hasLocation rdf:type owl:ObjectProperty ;
-                rdfs:domain tafp5:TrainRun ;
-                rdfs:range tafp5:OperationalLocation ;
                 rdfs:comment "To be understood as \"at some point in time\". Which point (or interval) will be given by the States."@en .
-
-
-###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant
-dul:hasParticipant rdf:type owl:ObjectProperty ;
-                   rdfs:domain tafp5:TrainRun ;
-                   rdfs:range rst_typ:RollingStock ;
-                   rdfs:comment "To be understood as \"at some point in time\". Which point (or interval) will be given by the States."@en .
 
 
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTimeInterval
@@ -88,22 +79,12 @@ dul:hasTimeInterval rdf:type owl:ObjectProperty .
 dul:isClassifiedBy rdf:type owl:ObjectProperty .
 
 
-###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy
-dul:isDescribedBy rdf:type owl:ObjectProperty ;
-                  rdfs:domain tafp5:TrainRun ;
-                  rdfs:range tafp5:Journey ;
-                  rdfs:comment "To be understood as \"at some point in time\". Which point (or interval) will be given by the States."@en .
-
-
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf
 dul:isLocationOf rdf:type owl:ObjectProperty .
 
 
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor
-dul:isSettingFor rdf:type owl:ObjectProperty ;
-                 rdfs:domain tafp5:LoadState ;
-                 rdfs:range tafp5:ITU ,
-                            tafp5:Wagon .
+dul:isSettingFor rdf:type owl:ObjectProperty .
 
 
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#playsRole
@@ -586,10 +567,6 @@ dul:InformationObject rdf:type owl:Class .
 dul:Organization rdf:type owl:Class .
 
 
-###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject
-dul:PhysicalObject rdf:type owl:Class .
-
-
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place
 dul:Place rdf:type owl:Class .
 
@@ -603,7 +580,8 @@ dul:Process rdf:type owl:Class .
 
 
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role
-dul:Role rdf:type owl:Class .
+dul:Role rdf:type owl:Class ;
+         rdfs:comment "Note: aligning with DOLCE, roles are defined as individuals such as \"freight role\" (instance of Load role), with no properties attached."@en .
 
 
 ###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation
@@ -761,11 +739,19 @@ tafp5:LoadState rdf:type owl:Class ;
                 rdfs:subClassOf tafp5:OperationalState ,
                                 [ rdf:type owl:Restriction ;
                                   owl:onProperty dul:hasTimeInterval ;
-                                  owl:allValuesFrom time:Interval
+                                  owl:someValuesFrom time:Interval
                                 ] ,
                                 [ rdf:type owl:Restriction ;
                                   owl:onProperty dul:isClassifiedBy ;
-                                  owl:allValuesFrom tafp5:FreightRole
+                                  owl:someValuesFrom tafp5:FreightRole
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty dul:isSettingFor ;
+                                  owl:someValuesFrom tafp5:ITU
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty dul:isSettingFor ;
+                                  owl:someValuesFrom tafp5:Wagon
                                 ] ;
                 rdfs:label "Load state"@en .
 
@@ -933,7 +919,6 @@ tafp5:Trailer rdf:type owl:Class ;
 ###  https://cdm.ovh/taf/tafp5#Train
 tafp5:Train rdf:type owl:Class ;
             rdfs:subClassOf rst_typ:RollingStock ,
-                            dul:PhysicalObject ,
                             tafp5:OperationalArtifact ;
             rdfs:comment "For want of a better class name: denotes the rolling stock (locos, wagons...) AND their supplies AND their (variable) loads, considered as a whole."@en ;
             rdfs:label "Train"@en .
@@ -980,7 +965,7 @@ tafp5:TrainMotionState rdf:type owl:Class ;
 tafp5:TrainOperator rdf:type owl:Class ;
                     rdfs:subClassOf tafp5:OperationalRole ;
                     rdfs:label "Train operator"@en ;
-                    rdfs:seeAlso "No matching class in TAF TSI 0.2 ontology. RU is identified bny a data property with no specified range."@en .
+                    rdfs:seeAlso "No matching class in ERA Telematics ontology v. 0.2. RU is identified bny a data property with no specified range."@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#TrainRun
@@ -988,13 +973,18 @@ tafp5:TrainRun rdf:type owl:Class ;
                rdfs:subClassOf dul:Process ,
                                tafp5:OperationalEntity ;
                rdfs:comment "Denotes a train run (operated on a particular date), equivalent to \"Train\" in TAF TSI, not a \"timetable entry\"."@en ;
-               rdfs:label "Train run" .
+               rdfs:label "Train run" ;
+               rdfs:seeAlso "http://data.europa.eu/949/Train"^^xsd:anyURI .
 
 
 ###  https://cdm.ovh/taf/tafp5#TrainRunState
 tafp5:TrainRunState rdf:type owl:Class ;
-                    rdfs:subClassOf tafp5:OperationalState ;
-                    rdfs:comment "Situation (State) of a train run. Supposed to hold anywhere and anytime during the train run."@en ;
+                    rdfs:subClassOf tafp5:OperationalState ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty tafp5:isStateOfTrainRun ;
+                                      owl:someValuesFrom owl:Thing
+                                    ] ;
+                    rdfs:comment "Situation (State) of a train run."@en ;
                     rdfs:label "Train run state" .
 
 
