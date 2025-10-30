@@ -498,6 +498,14 @@ tafp5:hasILUcode rdf:type owl:DatatypeProperty ,
                  rdfs:label "has ILU code"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#hasLengthInMeters
+tafp5:hasLengthInMeters rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain tafp5:TrainLengthState ;
+                        rdfs:range xsd:decimal ;
+                        rdfs:label "has length in meters"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#hasMassInTons
 tafp5:hasMassInTons rdf:type owl:DatatypeProperty ,
                              owl:FunctionalProperty ;
@@ -976,6 +984,12 @@ tafp5:TrainJourneyState rdf:type owl:Class ;
                         rdfs:label "Train journey state"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#TrainLengthState
+tafp5:TrainLengthState rdf:type owl:Class ;
+                       rdfs:subClassOf tafp5:TrainState ;
+                       rdfs:label "Train length state"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#TrainLocationState
 tafp5:TrainLocationState rdf:type owl:Class ;
                          rdfs:subClassOf tafp5:TrainRunState ;
@@ -1210,6 +1224,7 @@ tafp5:TrainOperator rdfs:label "Train operator"@en ;
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( tafp5:TrainCompositionState
+                tafp5:TrainLengthState
                 tafp5:TrainMassState
                 tafp5:TrainMotionState
               )
