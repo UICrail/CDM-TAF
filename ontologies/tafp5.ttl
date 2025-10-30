@@ -220,14 +220,6 @@ tafp5:hasPayload rdf:type owl:ObjectProperty ;
                  rdfs:label "has payload"@en .
 
 
-###  https://cdm.ovh/taf/tafp5#hasPrimaryCode
-tafp5:hasPrimaryCode rdf:type owl:ObjectProperty ,
-                              owl:FunctionalProperty ;
-                     rdfs:domain tafp5:OperationalLocation ;
-                     rdfs:range tafp5:LocationPrimaryCode ;
-                     rdfs:label "has primary code"@en .
-
-
 ###  https://cdm.ovh/taf/tafp5#hasReferenceObject
 tafp5:hasReferenceObject rdf:type owl:ObjectProperty ;
                          rdfs:domain tafp5:TransportCollaborationMessage ;
@@ -238,14 +230,6 @@ tafp5:hasReferenceObject rdf:type owl:ObjectProperty ;
                                                   )
                                     ] ;
                          rdfs:label "has reference object" .
-
-
-###  https://cdm.ovh/taf/tafp5#hasSubsidiaryCode
-tafp5:hasSubsidiaryCode rdf:type owl:ObjectProperty ,
-                                 owl:FunctionalProperty ;
-                        rdfs:domain tafp5:OperationalLocation ;
-                        rdfs:range tafp5:LocationSubsidiaryCode ;
-                        rdfs:label "has subsidiary code"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#hasTrain
@@ -535,6 +519,46 @@ tafp5:hasOtherCode rdf:type owl:DatatypeProperty ;
                    rdfs:label "has other code"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#hasPrimaryCode
+tafp5:hasPrimaryCode rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain tafp5:OperationalLocation ;
+                     rdfs:range xsd:string ;
+                     rdfs:label "has primary code"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasRID_UN_Number
+tafp5:hasRID_UN_Number rdf:type owl:DatatypeProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( tafp5:ITU
+                                                   tafp5:Wagon
+                                                 )
+                                   ] ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "RID chapter 3.2 Table A column 1. Identifies the dangerous substance. Number to be affixed to wagon or ITU according to RID chapter 5."@en ;
+                       rdfs:label "has RID_UN_ number"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasRID_class
+tafp5:hasRID_class rdf:type owl:DatatypeProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( tafp5:ITU
+                                               tafp5:Wagon
+                                             )
+                               ] ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "RID chapter 3.2 Table A column 3a. Identifies the hazard type. Class code to be affixed to wagon or ITU according to RID chapter 5."@en ;
+                   rdfs:label "has rid_class"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasSubsidiaryCode
+tafp5:hasSubsidiaryCode rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain tafp5:OperationalLocation ;
+                        rdfs:range xsd:string ;
+                        rdfs:label "has subsidiary code"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#isStationary
 tafp5:isStationary rdf:type owl:DatatypeProperty ,
                             owl:FunctionalProperty ;
@@ -761,6 +785,7 @@ tafp5:FreightRole rdf:type owl:Class ;
 ###  https://cdm.ovh/taf/tafp5#ITU
 tafp5:ITU rdf:type owl:Class ;
           rdfs:subClassOf tafp5:OperationalArtifact ;
+          owl:disjointWith tafp5:Wagon ;
           rdfs:label "Intermodal Transport Unit"@en .
 
 
@@ -824,18 +849,6 @@ tafp5:LoadState rdf:type owl:Class ;
                                                     ]
                                 ] ;
                 rdfs:label "Load state"@en .
-
-
-###  https://cdm.ovh/taf/tafp5#LocationPrimaryCode
-tafp5:LocationPrimaryCode rdf:type owl:Class ;
-                          rdfs:subClassOf skos:Concept ;
-                          rdfs:label "Location primary code"@en .
-
-
-###  https://cdm.ovh/taf/tafp5#LocationSubsidiaryCode
-tafp5:LocationSubsidiaryCode rdf:type owl:Class ;
-                             rdfs:subClassOf skos:Concept ;
-                             rdfs:label "Location subsidiary code"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#LocomotiveRole

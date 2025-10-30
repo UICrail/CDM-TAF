@@ -1821,34 +1821,6 @@ It consists in JourneySections, each journey section has the same structure.</le
           </annotations>
         </iri>
         <iri>
-          <value>https://cdm.ovh/taf/tafp5#LocationPrimaryCode</value>
-          <annotations>
-            <annotation>
-              <subject>https://cdm.ovh/taf/tafp5#LocationPrimaryCode</subject>
-              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
-              <object>
-                <lexicalForm>Location primary code</lexicalForm>
-                <datatype/>
-                <language>en</language>
-              </object>
-            </annotation>
-          </annotations>
-        </iri>
-        <iri>
-          <value>https://cdm.ovh/taf/tafp5#LocationSubsidiaryCode</value>
-          <annotations>
-            <annotation>
-              <subject>https://cdm.ovh/taf/tafp5#LocationSubsidiaryCode</subject>
-              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
-              <object>
-                <lexicalForm>Location subsidiary code</lexicalForm>
-                <datatype/>
-                <language>en</language>
-              </object>
-            </annotation>
-          </annotations>
-        </iri>
-        <iri>
           <value>https://cdm.ovh/taf/tafp5#LocomotiveRole</value>
           <annotations>
             <annotation>
@@ -3158,6 +3130,52 @@ To be differetiated from (possible, not included) traction provider role, the ag
               <property>http://www.w3.org/2000/01/rdf-schema#label</property>
               <object>
                 <lexicalForm>has primary code</lexicalForm>
+                <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/taf/tafp5#hasRID_UN_Number</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#hasRID_UN_Number</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>has RID_UN_ number</lexicalForm>
+                <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#hasRID_UN_Number</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>RID chapter 3.2 Table A column 1. Identifies the dangerous substance. Number to be affixed to wagon or ITU according to RID chapter 5.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/taf/tafp5#hasRID_class</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#hasRID_class</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>has rid_class</lexicalForm>
+                <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#hasRID_class</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>RID chapter 3.2 Table A column 3a. Identifies the hazard type. Class code to be affixed to wagon or ITU according to RID chapter 5.</lexicalForm>
                 <datatype/>
                 <language>en</language>
               </object>
@@ -3187,7 +3205,7 @@ To be differetiated from (possible, not included) traction provider role, the ag
               <property>http://www.w3.org/2000/01/rdf-schema#label</property>
               <object>
                 <lexicalForm>has subsidiary code</lexicalForm>
-                <datatype/>
+                <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
                 <language>en</language>
               </object>
             </annotation>
@@ -4209,28 +4227,23 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <iri>https://cdm.ovh/taf/tafp5#OperationalLocation</iri>
           <label x="40" customSize="0" y="-10" width="110" height="38" size="12"/>
         </node>
-        <node type="role" color="#fcfcfc" id="n1">
-          <geometry x="230" y="-90" width="70" height="50"/>
-          <iri>https://cdm.ovh/taf/tafp5#hasPrimaryCode</iri>
-          <label x="230" customSize="0" y="-120" width="100" height="23" size="12"/>
-        </node>
         <node type="attribute" color="#fcfcfc" id="n10">
-          <geometry x="230" y="70" width="20" height="20"/>
+          <geometry x="230" y="60" width="20" height="20"/>
           <iri>https://cdm.ovh/taf/tafp5#locationName</iri>
-          <label x="230" customSize="0" y="48" width="83" height="23" size="12"/>
+          <label x="230" customSize="0" y="38" width="83" height="23" size="12"/>
         </node>
         <node type="domain-restriction" color="#fcfcfc" id="n11">
-          <geometry x="150" y="70" width="20" height="20"/>
-          <label x="150" customSize="0" y="48" width="39" height="23" size="12">exists</label>
+          <geometry x="150" y="60" width="20" height="20"/>
+          <label x="150" customSize="0" y="38" width="39" height="23" size="12">exists</label>
         </node>
         <node type="range-restriction" color="#000000" id="n12">
-          <geometry x="310" y="70" width="20" height="20"/>
-          <label x="310" customSize="0" y="48" width="39" height="23" size="12">exists</label>
+          <geometry x="320" y="60" width="20" height="20"/>
+          <label x="320" customSize="0" y="38" width="39" height="23" size="12">exists</label>
         </node>
         <node type="value-domain" color="#fcfcfc" id="n13">
-          <geometry x="410" y="70" width="90" height="40"/>
+          <geometry x="410" y="60" width="90" height="40"/>
           <iri>http://www.w3.org/2001/XMLSchema#string</iri>
-          <label x="410" customSize="0" y="70" width="90" height="23" size="12"/>
+          <label x="410" customSize="0" y="60" width="90" height="23" size="12"/>
         </node>
         <node type="role" color="#fcfcfc" id="n15">
           <geometry x="-150" y="-10" width="70" height="50"/>
@@ -4253,11 +4266,6 @@ To be differetiated from (possible, not included) traction provider role, the ag
         <node type="role-inverse" color="#fcfcfc" id="n19">
           <geometry x="-150" y="180" width="50" height="30"/>
           <label x="-150" customSize="0" y="180" width="23" height="23" size="12"/>
-        </node>
-        <node type="role" color="#fcfcfc" id="n2">
-          <geometry x="230" y="-10" width="70" height="50"/>
-          <iri>https://cdm.ovh/taf/tafp5#hasSubsidiaryCode</iri>
-          <label x="230" customSize="0" y="-40" width="114" height="23" size="12"/>
         </node>
         <node type="role" color="#fcfcfc" id="n21">
           <geometry x="-260" y="180" width="70" height="50"/>
@@ -4282,60 +4290,57 @@ To be differetiated from (possible, not included) traction provider role, the ag
         <node type="disjoint-union" color="#000000" id="n25">
           <geometry x="-310" y="-10" width="50" height="30"/>
         </node>
-        <node type="concept" color="#fcfcfc" id="n3">
-          <geometry x="420" y="-90" width="110" height="50"/>
-          <iri>https://cdm.ovh/taf/tafp5#LocationPrimaryCode</iri>
-          <label x="420" customSize="0" y="-90" width="110" height="38" size="12"/>
+        <node type="value-domain" color="#fcfcfc" id="n26">
+          <geometry x="410" y="-10" width="90" height="40"/>
+          <iri>http://www.w3.org/2001/XMLSchema#string</iri>
+          <label x="410" customSize="0" y="-10" width="90" height="23" size="12"/>
         </node>
-        <node type="concept" color="#fcfcfc" id="n4">
-          <geometry x="510" y="-10" width="110" height="50"/>
-          <iri>https://cdm.ovh/taf/tafp5#LocationSubsidiaryCode</iri>
-          <label x="510" customSize="0" y="-10" width="110" height="38" size="12"/>
+        <node type="value-domain" color="#fcfcfc" id="n27">
+          <geometry x="410" y="-80" width="90" height="40"/>
+          <iri>http://www.w3.org/2001/XMLSchema#string</iri>
+          <label x="410" customSize="0" y="-80" width="90" height="23" size="12"/>
         </node>
-        <node type="range-restriction" color="#000000" id="n5">
-          <geometry x="310" y="-90" width="20" height="20"/>
-          <label x="310" customSize="0" y="-112" width="39" height="23" size="12">exists</label>
+        <node type="attribute" color="#fcfcfc" id="n28">
+          <geometry x="230" y="-80" width="20" height="20"/>
+          <iri>https://cdm.ovh/taf/tafp5#hasPrimaryCode</iri>
+          <label x="230" customSize="0" y="-102" width="100" height="23" size="12"/>
         </node>
-        <node type="range-restriction" color="#000000" id="n6">
-          <geometry x="310" y="-10" width="20" height="20"/>
-          <label x="310" customSize="0" y="-32" width="39" height="23" size="12">exists</label>
+        <node type="attribute" color="#fcfcfc" id="n29">
+          <geometry x="230" y="-10" width="20" height="20"/>
+          <iri>https://cdm.ovh/taf/tafp5#hasSubsidiaryCode</iri>
+          <label x="230" customSize="0" y="-32" width="114" height="23" size="12"/>
         </node>
-        <node type="domain-restriction" color="#fcfcfc" id="n7">
-          <geometry x="150" y="-90" width="20" height="20"/>
-          <label x="150" customSize="0" y="-112" width="39" height="23" size="12">exists</label>
+        <node type="range-restriction" color="#000000" id="n30">
+          <geometry x="320" y="-10" width="20" height="20"/>
+          <label x="320" customSize="0" y="-32" width="39" height="23" size="12">exists</label>
         </node>
-        <node type="domain-restriction" color="#fcfcfc" id="n8">
+        <node type="domain-restriction" color="#fcfcfc" id="n31">
           <geometry x="150" y="-10" width="20" height="20"/>
           <label x="150" customSize="0" y="-32" width="39" height="23" size="12">exists</label>
         </node>
-        <node type="concept" color="#646b63" id="n9">
-          <geometry x="470" y="-180" width="110" height="50"/>
-          <iri>http://www.w3.org/2004/02/skos/core#Concept</iri>
-          <label x="470" customSize="0" y="-180" width="110" height="23" size="12"/>
+        <node type="range-restriction" color="#000000" id="n5">
+          <geometry x="320" y="-80" width="20" height="20"/>
+          <label x="320" customSize="0" y="-102" width="39" height="23" size="12">exists</label>
         </node>
-        <edge type="inclusion" source="n6" id="e0" target="n4">
-          <point x="310" y="-10"/>
-          <point x="510" y="-10"/>
-        </edge>
-        <edge type="inclusion" source="n5" id="e1" target="n3">
-          <point x="310" y="-90"/>
-          <point x="420" y="-90"/>
-        </edge>
+        <node type="domain-restriction" color="#fcfcfc" id="n7">
+          <geometry x="150" y="-80" width="20" height="20"/>
+          <label x="150" customSize="0" y="-102" width="39" height="23" size="12">exists</label>
+        </node>
         <edge type="inclusion" source="n12" id="e10" target="n13">
-          <point x="310" y="70"/>
-          <point x="410" y="70"/>
+          <point x="320" y="60"/>
+          <point x="410" y="60"/>
         </edge>
         <edge type="inclusion" source="n11" id="e11" target="n0">
-          <point x="150" y="70"/>
+          <point x="150" y="60"/>
           <point x="40" y="-10"/>
         </edge>
         <edge type="input" source="n10" id="e12" target="n12">
-          <point x="230" y="70"/>
-          <point x="310" y="70"/>
+          <point x="230" y="60"/>
+          <point x="320" y="60"/>
         </edge>
         <edge type="input" source="n10" id="e13" target="n11">
-          <point x="230" y="70"/>
-          <point x="150" y="70"/>
+          <point x="230" y="60"/>
+          <point x="150" y="60"/>
         </edge>
         <edge type="inclusion" source="n17" id="e14" target="n0">
           <point x="-60" y="-10"/>
@@ -4354,7 +4359,7 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <point x="-150" y="-110"/>
         </edge>
         <edge type="inclusion" source="n7" id="e2" target="n0">
-          <point x="150" y="-90"/>
+          <point x="150" y="-80"/>
           <point x="40" y="-10"/>
         </edge>
         <edge type="input" source="n15" id="e20" target="n19">
@@ -4381,33 +4386,33 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <point x="-240" y="-10"/>
           <point x="-310" y="-10"/>
         </edge>
-        <edge type="inclusion" source="n8" id="e3" target="n0">
+        <edge type="inclusion" source="n5" id="e30" target="n27">
+          <point x="320" y="-80"/>
+          <point x="410" y="-80"/>
+        </edge>
+        <edge type="inclusion" source="n31" id="e31" target="n0">
           <point x="150" y="-10"/>
           <point x="40" y="-10"/>
         </edge>
-        <edge type="input" source="n1" id="e4" target="n5">
-          <point x="230" y="-90"/>
-          <point x="310" y="-90"/>
+        <edge type="inclusion" source="n30" id="e32" target="n26">
+          <point x="320" y="-10"/>
+          <point x="410" y="-10"/>
         </edge>
-        <edge type="input" source="n2" id="e5" target="n6">
+        <edge type="input" source="n28" id="e33" target="n5">
+          <point x="230" y="-80"/>
+          <point x="320" y="-80"/>
+        </edge>
+        <edge type="input" source="n28" id="e34" target="n7">
+          <point x="230" y="-80"/>
+          <point x="150" y="-80"/>
+        </edge>
+        <edge type="input" source="n29" id="e35" target="n30">
           <point x="230" y="-10"/>
-          <point x="310" y="-10"/>
+          <point x="320" y="-10"/>
         </edge>
-        <edge type="input" source="n2" id="e6" target="n8">
+        <edge type="input" source="n29" id="e36" target="n31">
           <point x="230" y="-10"/>
           <point x="150" y="-10"/>
-        </edge>
-        <edge type="input" source="n1" id="e7" target="n7">
-          <point x="230" y="-90"/>
-          <point x="150" y="-90"/>
-        </edge>
-        <edge type="inclusion" source="n3" id="e8" target="n9">
-          <point x="420" y="-90"/>
-          <point x="470" y="-180"/>
-        </edge>
-        <edge type="inclusion" source="n4" id="e9" target="n9">
-          <point x="510" y="-10"/>
-          <point x="470" y="-180"/>
         </edge>
       </diagram>
       <diagram name="04 - Train" width="5000" height="5000">
@@ -6888,6 +6893,97 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <point x="740" y="180"/>
         </edge>
       </diagram>
+      <diagram name="20 - RID" width="5000" height="5000">
+        <node type="attribute" color="#fcfcfc" id="n1">
+          <geometry x="290" y="140" width="20" height="20"/>
+          <iri>https://cdm.ovh/taf/tafp5#hasRID_UN_Number</iri>
+          <label x="290" customSize="0" y="118" width="119" height="23" size="12"/>
+        </node>
+        <node type="domain-restriction" color="#fcfcfc" id="n10">
+          <geometry x="180" y="140" width="20" height="20"/>
+          <label x="180" customSize="0" y="118" width="39" height="23" size="12">exists</label>
+        </node>
+        <node type="domain-restriction" color="#fcfcfc" id="n11">
+          <geometry x="180" y="220" width="20" height="20"/>
+          <label x="180" customSize="0" y="198" width="39" height="23" size="12">exists</label>
+        </node>
+        <node type="attribute" color="#fcfcfc" id="n2">
+          <geometry x="290" y="220" width="20" height="20"/>
+          <iri>https://cdm.ovh/taf/tafp5#hasRID_class</iri>
+          <label x="290" customSize="0" y="198" width="77" height="23" size="12"/>
+        </node>
+        <node type="value-domain" color="#fcfcfc" id="n3">
+          <geometry x="500" y="140" width="90" height="40"/>
+          <iri>http://www.w3.org/2001/XMLSchema#string</iri>
+          <label x="500" customSize="0" y="140" width="90" height="23" size="12"/>
+        </node>
+        <node type="range-restriction" color="#000000" id="n4">
+          <geometry x="400" y="140" width="20" height="20"/>
+          <label x="400" customSize="0" y="118" width="39" height="23" size="12">exists</label>
+        </node>
+        <node type="range-restriction" color="#000000" id="n5">
+          <geometry x="400" y="220" width="20" height="20"/>
+          <label x="400" customSize="0" y="198" width="39" height="23" size="12">exists</label>
+        </node>
+        <node type="value-domain" color="#fcfcfc" id="n6">
+          <geometry x="500" y="220" width="90" height="40"/>
+          <iri>http://www.w3.org/2001/XMLSchema#string</iri>
+          <label x="500" customSize="0" y="220" width="90" height="23" size="12"/>
+        </node>
+        <node type="concept" color="#fcfcfc" id="n7">
+          <geometry x="-20" y="240" width="110" height="50"/>
+          <iri>https://cdm.ovh/taf/tafp5#Wagon</iri>
+          <label x="-20" customSize="0" y="240" width="110" height="23" size="12"/>
+        </node>
+        <node type="concept" color="#fcfcfc" id="n8">
+          <geometry x="-20" y="110" width="110" height="50"/>
+          <iri>https://cdm.ovh/taf/tafp5#ITU</iri>
+          <label x="-20" customSize="0" y="110" width="110" height="38" size="12"/>
+        </node>
+        <node type="disjoint-union" color="#000000" id="n9">
+          <geometry x="100" y="180" width="50" height="30"/>
+        </node>
+        <edge type="inclusion" source="n5" id="e0" target="n6">
+          <point x="400" y="220"/>
+          <point x="500" y="220"/>
+        </edge>
+        <edge type="inclusion" source="n4" id="e1" target="n3">
+          <point x="400" y="140"/>
+          <point x="500" y="140"/>
+        </edge>
+        <edge type="input" source="n1" id="e10" target="n10">
+          <point x="290" y="140"/>
+          <point x="180" y="140"/>
+        </edge>
+        <edge type="input" source="n2" id="e11" target="n11">
+          <point x="290" y="220"/>
+          <point x="180" y="220"/>
+        </edge>
+        <edge type="input" source="n1" id="e2" target="n4">
+          <point x="290" y="140"/>
+          <point x="400" y="140"/>
+        </edge>
+        <edge type="input" source="n2" id="e3" target="n5">
+          <point x="290" y="220"/>
+          <point x="400" y="220"/>
+        </edge>
+        <edge type="input" source="n8" id="e5" target="n9">
+          <point x="-20" y="110"/>
+          <point x="100" y="180"/>
+        </edge>
+        <edge type="input" source="n7" id="e6" target="n9">
+          <point x="-20" y="240"/>
+          <point x="100" y="180"/>
+        </edge>
+        <edge type="inclusion" source="n11" id="e8" target="n9">
+          <point x="180" y="220"/>
+          <point x="100" y="180"/>
+        </edge>
+        <edge type="inclusion" source="n10" id="e9" target="n9">
+          <point x="180" y="140"/>
+          <point x="100" y="180"/>
+        </edge>
+      </diagram>
       <diagram name="99 - Varia" width="5000" height="5000">
         <node type="concept" color="#fcfcfc" id="n0">
           <geometry x="200" y="-60" width="110" height="50"/>
@@ -6895,12 +6991,12 @@ To be differetiated from (possible, not included) traction provider role, the ag
           <label x="200" customSize="0" y="-60" width="110" height="23" size="12"/>
         </node>
         <node type="concept" color="#fcfcfc" id="n1">
-          <geometry x="200" y="80" width="110" height="50"/>
+          <geometry x="200" y="30" width="110" height="50"/>
           <iri>http://www.w3.org/2006/time#Interval</iri>
-          <label x="200" customSize="0" y="80" width="110" height="23" size="12"/>
+          <label x="200" customSize="0" y="30" width="110" height="23" size="12"/>
         </node>
         <edge type="inclusion" source="n1" id="e0" target="n0">
-          <point x="200" y="80"/>
+          <point x="200" y="30"/>
           <point x="200" y="-60"/>
         </edge>
       </diagram>
