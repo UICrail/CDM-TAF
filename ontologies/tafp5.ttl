@@ -427,16 +427,6 @@ tafp5:effectiveUntil rdf:type owl:DatatypeProperty ;
                      rdfs:label "effective until"@en .
 
 
-###  https://cdm.ovh/taf/tafp5#generatedAt
-tafp5:generatedAt rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf prov:generatedAtTime ;
-                  rdf:type owl:FunctionalProperty ;
-                  rdfs:domain tafp5:Message ;
-                  rdfs:range xsd:dateTimeStamp ;
-                  rdfs:comment "same semantics as prov:generatedAtTime"@en ;
-                  rdfs:label "generated at"@en .
-
-
 ###  https://cdm.ovh/taf/tafp5#hasArrivalTime
 tafp5:hasArrivalTime rdf:type owl:DatatypeProperty ,
                               owl:FunctionalProperty ;
@@ -495,6 +485,18 @@ tafp5:hasILUcode rdf:type owl:DatatypeProperty ,
                  rdfs:label "has ILU code"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#hasKemlerCode
+tafp5:hasKemlerCode rdf:type owl:DatatypeProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( tafp5:ITU
+                                                tafp5:Wagon
+                                              )
+                                ] ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Emergency response-related code (3 digits) as per RID 5.3.2.3"@en ;
+                    rdfs:label "has Kemler code" .
+
+
 ###  https://cdm.ovh/taf/tafp5#hasLengthInMeters
 tafp5:hasLengthInMeters rdf:type owl:DatatypeProperty ,
                                  owl:FunctionalProperty ;
@@ -536,7 +538,7 @@ tafp5:hasRID_UN_Number rdf:type owl:DatatypeProperty ;
                                    ] ;
                        rdfs:range xsd:string ;
                        rdfs:comment "RID chapter 3.2 Table A column 1. Identifies the dangerous substance. Number to be affixed to wagon or ITU according to RID chapter 5."@en ;
-                       rdfs:label "has RID_UN_ number"@en .
+                       rdfs:label "has RID UN number" .
 
 
 ###  https://cdm.ovh/taf/tafp5#hasRID_class
@@ -548,7 +550,7 @@ tafp5:hasRID_class rdf:type owl:DatatypeProperty ;
                                ] ;
                    rdfs:range xsd:string ;
                    rdfs:comment "RID chapter 3.2 Table A column 3a. Identifies the hazard type. Class code to be affixed to wagon or ITU according to RID chapter 5."@en ;
-                   rdfs:label "has rid_class"@en .
+                   rdfs:label "has RID class" .
 
 
 ###  https://cdm.ovh/taf/tafp5#hasSubsidiaryCode
@@ -589,13 +591,23 @@ tafp5:messageVersion rdf:type owl:DatatypeProperty ;
                      rdfs:label "message version"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#reportedAt
+tafp5:reportedAt rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf prov:generatedAtTime ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain tafp5:Message ;
+                 rdfs:range xsd:dateTimeStamp ;
+                 rdfs:comment "same semantics as prov:generatedAtTime"@en ;
+                 rdfs:label "reported at"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#reportedBy
 tafp5:reportedBy rdf:type owl:DatatypeProperty ,
                           owl:FunctionalProperty ;
                  rdfs:domain tafp5:TransportCollaborationMessage ;
                  rdfs:range xsd:string ;
                  rdfs:comment ""@en ;
-                 rdfs:label "has source"@en .
+                 rdfs:label "reported by"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#sizeAndTypeCode
@@ -605,6 +617,24 @@ tafp5:sizeAndTypeCode rdf:type owl:DatatypeProperty ,
                       rdfs:range xsd:string ;
                       rdfs:comment "4 digit alphanum code for container size and type, according to ISO 6346"@en ;
                       rdfs:label "size and type code" .
+
+
+###  https://cdm.ovh/taf/tafp5#startsAtOrigin
+tafp5:startsAtOrigin rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain tafp5:JourneySchedule ;
+                     rdfs:range xsd:boolean ;
+                     rdfs:comment "if No, means pass-through"@en ;
+                     rdfs:label "starts at origin"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#stopsAtDestination
+tafp5:stopsAtDestination rdf:type owl:DatatypeProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain tafp5:JourneySchedule ;
+                         rdfs:range xsd:boolean ;
+                         rdfs:comment "if No, means pass-through"@en ;
+                         rdfs:label "stops at destination"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#trainDepartureDate
