@@ -156,6 +156,14 @@ tafp5:hasFacilityFunction rdf:type owl:ObjectProperty ;
                           rdfs:label "has facility function"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#hasImageContent
+tafp5:hasImageContent rdf:type owl:ObjectProperty ,
+                               owl:InverseFunctionalProperty ;
+                      rdfs:domain tafp5:Image ;
+                      rdfs:range tafp5:contentLocation ;
+                      rdfs:label "has image content"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#hasJourney
 tafp5:hasJourney rdf:type owl:ObjectProperty ;
                  rdfs:domain tafp5:TrainJourneyState ,
@@ -1068,6 +1076,12 @@ tafp5:Wagon rdf:type owl:Class ;
             rdfs:subClassOf rst_typ:Wagon ,
                             tafp5:OperationalArtifact ;
             rdfs:label "Wagon"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#contentLocation
+tafp5:contentLocation rdf:type owl:Class ;
+                      rdfs:comment "The image file as a BLOB. Possibly not in the same namespace as the Image individual."@en ;
+                      rdfs:label "content location" .
 
 
 #################################################################

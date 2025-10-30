@@ -2655,6 +2655,29 @@ To be differetiated from (possible, not included) traction provider role, the ag
           </annotations>
         </iri>
         <iri>
+          <value>https://cdm.ovh/taf/tafp5#contentLocation</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#contentLocation</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>content location</lexicalForm>
+                <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
+                <language/>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#contentLocation</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>The image file as a BLOB. Possibly not in the same namespace as the Image individual.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
           <value>https://cdm.ovh/taf/tafp5#controlledLocomotiveRole</value>
           <annotations>
             <annotation>
@@ -2930,6 +2953,21 @@ To be differetiated from (possible, not included) traction provider role, the ag
               <object>
                 <lexicalForm>ILU code (under EN 13044 series) is the standardized identification (owner, number, check digit) for intermodal loading units in Europe. The ILU code is designed for non-ISO containers, swap bodies, semi-trailers in intra-European combined transport.</lexicalForm>
                 <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/taf/tafp5#hasImageContent</value>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/taf/tafp5#hasImageContent</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>has image content</lexicalForm>
+                <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
                 <language>en</language>
               </object>
             </annotation>
@@ -6803,6 +6841,47 @@ To be differetiated from (possible, not included) traction provider role, the ag
         <edge type="input" source="n5" id="e9" target="n7">
           <point x="410" y="-900"/>
           <point x="320" y="-900"/>
+        </edge>
+      </diagram>
+      <diagram name="15 - Image" width="5000" height="5000">
+        <node type="concept" color="#fcfcfc" id="n0">
+          <geometry x="290" y="180" width="110" height="50"/>
+          <iri>https://cdm.ovh/taf/tafp5#Image</iri>
+          <label x="290" customSize="0" y="180" width="110" height="23" size="12"/>
+        </node>
+        <node type="role" color="#fcfcfc" id="n10">
+          <geometry x="460" y="180" width="70" height="50"/>
+          <iri>https://cdm.ovh/taf/tafp5#hasImageContent</iri>
+          <label x="460" customSize="0" y="150" width="106" height="23" size="12"/>
+        </node>
+        <node type="range-restriction" color="#000000" id="n11">
+          <geometry x="540" y="180" width="20" height="20"/>
+          <label x="540" customSize="0" y="158" width="39" height="23" size="12">exists</label>
+        </node>
+        <node type="domain-restriction" color="#fcfcfc" id="n12">
+          <geometry x="380" y="180" width="20" height="20"/>
+          <label x="380" customSize="0" y="158" width="39" height="23" size="12">exists</label>
+        </node>
+        <node type="concept" color="#fcfcfc" id="n9">
+          <geometry x="630" y="180" width="110" height="50"/>
+          <iri>https://cdm.ovh/taf/tafp5#contentLocation</iri>
+          <label x="630" customSize="0" y="180" width="110" height="23" size="12"/>
+        </node>
+        <edge type="inclusion" source="n11" id="e10" target="n9">
+          <point x="540" y="180"/>
+          <point x="630" y="180"/>
+        </edge>
+        <edge type="inclusion" source="n12" id="e11" target="n0">
+          <point x="380" y="180"/>
+          <point x="290" y="180"/>
+        </edge>
+        <edge type="input" source="n10" id="e13" target="n12">
+          <point x="460" y="180"/>
+          <point x="380" y="180"/>
+        </edge>
+        <edge type="input" source="n10" id="e14" target="n11">
+          <point x="460" y="180"/>
+          <point x="540" y="180"/>
         </edge>
       </diagram>
       <diagram name="99 - Varia" width="5000" height="5000">
