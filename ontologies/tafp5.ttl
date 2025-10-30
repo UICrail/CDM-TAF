@@ -27,6 +27,10 @@
 #    Datatypes
 #################################################################
 
+###  http://www.w3.org/2001/XMLSchema#base64Binary
+xsd:base64Binary rdf:type rdfs:Datatype .
+
+
 ###  http://www.w3.org/2001/XMLSchema#boolean
 xsd:boolean rdf:type rdfs:Datatype .
 
@@ -160,7 +164,7 @@ tafp5:hasFacilityFunction rdf:type owl:ObjectProperty ;
 tafp5:hasImageContent rdf:type owl:ObjectProperty ,
                                owl:InverseFunctionalProperty ;
                       rdfs:domain tafp5:Image ;
-                      rdfs:range tafp5:contentLocation ;
+                      rdfs:range tafp5:ContentLocation ;
                       rdfs:label "has image content"@en .
 
 
@@ -242,13 +246,6 @@ tafp5:hasSubsidiaryCode rdf:type owl:ObjectProperty ,
                         rdfs:domain tafp5:OperationalLocation ;
                         rdfs:range tafp5:LocationSubsidiaryCode ;
                         rdfs:label "has subsidiary code"@en .
-
-
-###  https://cdm.ovh/taf/tafp5#hasTimeExtent
-tafp5:hasTimeExtent rdf:type owl:ObjectProperty ;
-                    rdfs:domain tafp5:OperationalState ;
-                    rdfs:range time:TemporalEntity ;
-                    rdfs:label "has time extent" .
 
 
 ###  https://cdm.ovh/taf/tafp5#hasTrain
@@ -411,6 +408,14 @@ prov:generatedAtTime rdf:type owl:DatatypeProperty ;
 
 ###  http://www.w3.org/ns/prov#invalidatedAtTime
 prov:invalidatedAtTime rdf:type owl:DatatypeProperty .
+
+
+###  https://cdm.ovh/taf/tafp5#asPNG
+tafp5:asPNG rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain tafp5:ContentLocation ;
+            rdfs:range xsd:base64Binary ;
+            rdfs:label "as PNG"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#createdAt
@@ -680,12 +685,6 @@ time:Interval rdf:type owl:Class ;
               rdfs:comment "W3C Time interval, possibly open-ended or degenerate (start = end)"@en .
 
 
-###  http://www.w3.org/2006/time#TemporalEntity
-time:TemporalEntity rdf:type owl:Class ;
-                    rdfs:comment "Note: format(s) to be discussed"@en ;
-                    rdfs:label "Temporal entity"@en .
-
-
 ###  http://www.w3.org/ns/org#Organization
 org:Organization rdf:type owl:Class .
 
@@ -715,6 +714,12 @@ tafp5:CarrierState rdf:type owl:Class ;
 tafp5:Container rdf:type owl:Class ;
                 rdfs:subClassOf tafp5:ITU ;
                 rdfs:label "Container"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#ContentLocation
+tafp5:ContentLocation rdf:type owl:Class ;
+                      rdfs:comment "The image file as a BLOB. Possibly not in the same namespace as the Image individual."@en ;
+                      rdfs:label "Content location" .
 
 
 ###  https://cdm.ovh/taf/tafp5#ExecutedJourney
@@ -889,7 +894,11 @@ tafp5:OperationalRole rdf:type owl:Class ;
 ###  https://cdm.ovh/taf/tafp5#OperationalState
 tafp5:OperationalState rdf:type owl:Class ;
                        rdfs:subClassOf dul:Situation ,
-                                       tafp5:OperationalEntity ;
+                                       tafp5:OperationalEntity ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty dul:hasTimeInterval ;
+                                         owl:allValuesFrom time:Interval
+                                       ] ;
                        rdfs:comment "An operational state is a situation (in the sense of DUL). An operational is a typical payload of any operational message."@en ,
                                     "Note: other states may concern yards, depots, stations... to be discussed."@en ;
                        rdfs:label "Operational state"@en .
@@ -1076,12 +1085,6 @@ tafp5:Wagon rdf:type owl:Class ;
             rdfs:subClassOf rst_typ:Wagon ,
                             tafp5:OperationalArtifact ;
             rdfs:label "Wagon"@en .
-
-
-###  https://cdm.ovh/taf/tafp5#contentLocation
-tafp5:contentLocation rdf:type owl:Class ;
-                      rdfs:comment "The image file as a BLOB. Possibly not in the same namespace as the Image individual."@en ;
-                      rdfs:label "content location" .
 
 
 #################################################################
