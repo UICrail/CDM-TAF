@@ -1,6 +1,7 @@
 @prefix : <http://cdm.ovh/taf/tafp5#> .
 @prefix bag: <http://www.ontologydesignpatterns.org/cp/owl/bag.owl#> .
 @prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix org: <http://www.w3.org/ns/org#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix taf: <http://data.europa.eu/949/> .
@@ -12,6 +13,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix tafp5: <https://cdm.ovh/taf/tafp5#> .
+@prefix regorg: <http://www.w3.org/ns/regorg#> .
 @prefix rst_typ: <http://cdm.ovh/rsm/rolling_stock/typology/typology#> .
 @prefix rst_cons: <http://cdm.ovh/rsm/rolling_stock/consist/RollingStockConsist#> .
 @base <http://cdm.ovh/taf/tafp5#> .
@@ -316,8 +318,13 @@ tafp5:playsFacilityRole rdf:type owl:ObjectProperty ;
 ###  https://cdm.ovh/taf/tafp5#playsOperationalRole
 tafp5:playsOperationalRole rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf dul:playsRole ;
-                           rdfs:domain dul:Organization ;
+                           rdfs:domain [ owl:intersectionOf ( dul:Organization
+                                                              regorg:RegisteredOrganization
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
                            rdfs:range tafp5:OperationalRole ;
+                           rdfs:comment "property only to be used if role is permanent"@en ;
                            rdfs:label "plays operational role"@en .
 
 
@@ -423,6 +430,16 @@ tafp5:effectiveUntil rdf:type owl:DatatypeProperty ;
                      rdfs:label "effective until"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#generatedAt
+tafp5:generatedAt rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf prov:generatedAtTime ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain tafp5:Message ;
+                  rdfs:range xsd:dateTimeStamp ;
+                  rdfs:comment "same semantics as prov:generatedAtTime"@en ;
+                  rdfs:label "generated at"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#hasArrivalTime
 tafp5:hasArrivalTime rdf:type owl:DatatypeProperty ,
                               owl:FunctionalProperty ;
@@ -436,7 +453,7 @@ tafp5:hasBICCcode rdf:type owl:DatatypeProperty ,
                            owl:FunctionalProperty ;
                   rdfs:domain tafp5:ITU ;
                   rdfs:range xsd:string ;
-                  rdfs:comment "BIC code according to ISO6346 (4 letters, 6 numeric digits and 1 check digit)"@en ;
+                  rdfs:comment "BIC code according to ISO 6346 (4 letters, 6 numeric digits and 1 check digit)"@en ;
                   rdfs:label "has BIC code" .
 
 
@@ -472,6 +489,15 @@ tafp5:hasFullText rdf:type owl:DatatypeProperty ,
                   rdfs:label "has full text" .
 
 
+###  https://cdm.ovh/taf/tafp5#hasILUcode
+tafp5:hasILUcode rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain tafp5:ITU ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "ILU code (under EN 13044 series) is the standardized identification (owner, number, check digit) for intermodal loading units in Europe. The ILU code is designed for non-ISO containers, swap bodies, semi-trailers in intra-European combined transport."@en ;
+                 rdfs:label "has ILU code"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#hasMassInTons
 tafp5:hasMassInTons rdf:type owl:DatatypeProperty ,
                              owl:FunctionalProperty ;
@@ -479,6 +505,13 @@ tafp5:hasMassInTons rdf:type owl:DatatypeProperty ,
                     rdfs:range xsd:decimal ;
                     rdfs:comment "provisional. To be expanded, using SSN and QUDT."@en ;
                     rdfs:label "has mass in tons"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#hasOtherCode
+tafp5:hasOtherCode rdf:type owl:DatatypeProperty ;
+                   rdfs:domain tafp5:ITU ;
+                   rdfs:range xsd:string ;
+                   rdfs:label "has other code"@en .
 
 
 ###  https://cdm.ovh/taf/tafp5#isStationary
@@ -511,16 +544,6 @@ tafp5:messageVersion rdf:type owl:DatatypeProperty ;
                      rdfs:label "message version"@en .
 
 
-###  https://cdm.ovh/taf/tafp5#reportedAt
-tafp5:reportedAt rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf prov:generatedAtTime ;
-                 rdf:type owl:FunctionalProperty ;
-                 rdfs:domain tafp5:Message ;
-                 rdfs:range xsd:dateTimeStamp ;
-                 rdfs:comment "same semantics as prov:generatedAtTime"@en ;
-                 rdfs:label "reported at"@en .
-
-
 ###  https://cdm.ovh/taf/tafp5#reportedBy
 tafp5:reportedBy rdf:type owl:DatatypeProperty ,
                           owl:FunctionalProperty ;
@@ -535,7 +558,7 @@ tafp5:sizeAndTypeCode rdf:type owl:DatatypeProperty ,
                                owl:FunctionalProperty ;
                       rdfs:domain tafp5:Container ;
                       rdfs:range xsd:string ;
-                      rdfs:comment "4 digit alphanum code for container size and type, according to ISO6346"@en ;
+                      rdfs:comment "4 digit alphanum code for container size and type, according to ISO 6346"@en ;
                       rdfs:label "size and type code" .
 
 
@@ -647,21 +670,23 @@ time:TemporalEntity rdf:type owl:Class ;
                     rdfs:label "Temporal entity"@en .
 
 
+###  http://www.w3.org/ns/org#Organization
+org:Organization rdf:type owl:Class .
+
+
 ###  http://www.w3.org/ns/prov#Entity
 prov:Entity rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/regorg#RegisteredOrganization
+regorg:RegisteredOrganization rdf:type owl:Class ;
+                              rdfs:subClassOf org:Organization .
 
 
 ###  https://cdm.ovh/taf/tafp5#AdministrativeState
 tafp5:AdministrativeState rdf:type owl:Class ;
                           rdfs:subClassOf tafp5:OperationalState ;
                           rdfs:label "Administrative state"@en .
-
-
-###  https://cdm.ovh/taf/tafp5#CargoCarrier
-tafp5:CargoCarrier rdf:type owl:Class ;
-                   rdfs:subClassOf tafp5:OperationalRole ;
-                   rdfs:label "Cargo carrier"@en ;
-                   rdfs:seeAlso taf:Carrier .
 
 
 ###  https://cdm.ovh/taf/tafp5#CarrierState
@@ -749,13 +774,6 @@ tafp5:JourneySection rdf:type owl:Class ;
                      rdfs:comment "Journey sections are chained by properties nextSection and previousSection."@en ;
                      rdfs:label "Journey section"@en ;
                      rdfs:seeAlso "http://data.europa.eu/949/JourneySection"^^xsd:anyURI .
-
-
-###  https://cdm.ovh/taf/tafp5#LeadCarrier
-tafp5:LeadCarrier rdf:type owl:Class ;
-                  rdfs:subClassOf tafp5:CargoCarrier ;
-                  rdfs:label "Lead carrier"@en ;
-                  rdfs:seeAlso taf:LeadCarrier .
 
 
 ###  https://cdm.ovh/taf/tafp5#LoadRole
@@ -978,10 +996,7 @@ tafp5:TrainMotionState rdf:type owl:Class ;
 
 
 ###  https://cdm.ovh/taf/tafp5#TrainOperator
-tafp5:TrainOperator rdf:type owl:Class ;
-                    rdfs:subClassOf tafp5:OperationalRole ;
-                    rdfs:label "Train operator"@en ;
-                    rdfs:seeAlso "No matching class in ERA Telematics ontology v. 0.2. RU is identified bny a data property with no specified range."@en .
+tafp5:TrainOperator rdf:type owl:Class .
 
 
 ###  https://cdm.ovh/taf/tafp5#TrainRun
@@ -1045,10 +1060,35 @@ tafp5:Wagon rdf:type owl:Class ;
 #    Individuals
 #################################################################
 
+###  https://cdm.ovh/taf/tafp5#CargoCarrier
+tafp5:CargoCarrier rdf:type owl:NamedIndividual ,
+                            tafp5:OperationalRole ;
+                   rdfs:label "Cargo carrier"@en ;
+                   rdfs:seeAlso taf:Carrier .
+
+
 ###  https://cdm.ovh/taf/tafp5#FacilityRoleOrFunctionScheme
 tafp5:FacilityRoleOrFunctionScheme rdf:type owl:NamedIndividual ,
                                             skos:ConceptScheme ;
                                    rdfs:label "Facility role or function scheme"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#LeadCarrier
+tafp5:LeadCarrier rdf:type owl:NamedIndividual ,
+                           tafp5:OperationalRole ;
+                  rdfs:label "Lead carrier"@en ;
+                  rdfs:seeAlso taf:LeadCarrier .
+
+
+###  https://cdm.ovh/taf/tafp5#LeadRU
+tafp5:LeadRU rdf:type owl:NamedIndividual ,
+                      tafp5:OperationalRole ;
+             rdfs:label "Lead RU"@en .
+
+
+###  https://cdm.ovh/taf/tafp5#TrainOperator
+tafp5:TrainOperator rdf:type owl:NamedIndividual ,
+                             tafp5:OperationalRole .
 
 
 ###  https://cdm.ovh/taf/tafp5#Workshop
@@ -1093,6 +1133,14 @@ tafp5:leadingLocomotiveRole rdf:type owl:NamedIndividual ,
 tafp5:locomotiveRole rdf:type owl:NamedIndividual ,
                               tafp5:LocomotiveRole ;
                      rdfs:label "locomotive role"@en .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+tafp5:TrainOperator rdfs:label "Train operator"@en ;
+                    rdfs:seeAlso "No matching class in ERA Telematics ontology v. 0.2. RU is identified bny a data property with no specified range."@en .
 
 
 #################################################################
