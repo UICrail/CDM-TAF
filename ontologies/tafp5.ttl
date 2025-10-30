@@ -591,6 +591,14 @@ tafp5:messageVersion rdf:type owl:DatatypeProperty ;
                      rdfs:label "message version"@en .
 
 
+###  https://cdm.ovh/taf/tafp5#name
+tafp5:name rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain tafp5:OperationalEntity ;
+           rdfs:range xsd:string ;
+           rdfs:label "name"@en .
+
+
 ###  https://cdm.ovh/taf/tafp5#reportedAt
 tafp5:reportedAt rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf prov:generatedAtTime ;
